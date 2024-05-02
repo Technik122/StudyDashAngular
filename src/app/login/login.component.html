@@ -1,0 +1,44 @@
+<div [ngClass]="active == 'login' ? 'login-container' : 'hidden'">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmitLogin()" #loginForm="ngForm">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Benutzername</mat-label>
+          <input matInput placeholder="Ihr Benutzername" [(ngModel)]="username" name="username">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Passwort</mat-label>
+          <input matInput type="password" placeholder="Ihr Passwort" [(ngModel)]="password" name="password">
+        </mat-form-field>
+        <mat-checkbox class="checkbox-style">Angemeldet bleiben</mat-checkbox>
+        <button type="submit" class="login-button" (click)="onLoginTab()">Login</button>
+        <p class="register-text">Noch kein Account? <a href="#" (click)="onRegisterTab()">Registrieren</a></p>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div [ngClass]="active == 'register' ? 'login-container' : 'hidden'">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Registrieren</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmitRegister()" #loginForm="ngForm">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Benutzername</mat-label>
+          <input matInput placeholder="Ihr Benutzername" [(ngModel)]="username" name="username">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Passwort</mat-label>
+          <input matInput type="password" placeholder="Ihr Passwort" [(ngModel)]="password" name="password">
+        </mat-form-field>
+        <button type="submit" class="login-button" (click)="onRegisterTab()">Registrieren</button>
+        <p class="register-text">Doch ein Account da? <a href="#" (click)="onLoginTab()">Einloggen</a></p>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
