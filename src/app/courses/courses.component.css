@@ -1,0 +1,13 @@
+.underlined-heading {
+  position: relative; /* Positionierung relativ zum Elternelement */
+}
+
+.underlined-heading::after {
+  content: ""; /* Fügt kein zusätzliches Inhaltselement ein */
+  position: absolute; /* Positionierung relativ zum Elternelement */
+  bottom: -5px; /* Position unterhalb des Texts */
+  left: 0; /* Beginnt am linken Rand */
+  width: 100%; /* Nimmt die gesamte Breite des Elternelements ein */
+  height: 2px; /* Höhe des Unterstrichs */
+  background-color: black; /* Farbe des Unterstrichs */
+}

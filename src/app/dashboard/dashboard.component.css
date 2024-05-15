@@ -1,0 +1,40 @@
+.dashboard {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.dashboard-header {
+  grid-column: 1 / span 2;
+  background-image: url("/assets/cherry blossoms.jpg");
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  height: 150px;
+}
+
+.dashboard-leftarea {
+  grid-column: 1;
+}
+
+.dashboard-rightarea {
+  grid-column: 2;
+}
+
+.top-row, .bottom-row, .dashboard-rightarea {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.middle-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.left-column, .right-column, .row {
+  padding: 20px;
+  width: 50%;
+}
