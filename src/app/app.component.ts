@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {AxiosService} from "./axios.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -6,9 +8,19 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title: string;
 
-  constructor() {
-    this.title = 'StudyDash';
+  constructor(private axiosService: AxiosService, private router: Router) {}
+
+  async ngOnInit() {
+    if (this.axiosService.isLoggedIn()) {
+      const isValid = await this.axiosService.isTokenValid();
+      if (isValid) {
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.router.navigate(['/login']);
+      }
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }

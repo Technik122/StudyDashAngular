@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { AxiosService } from "./axios.service";
-import { ContentComponent } from './content/content.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LoginComponent } from './login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,16 +19,17 @@ import { NotesComponent } from './notes/notes.component';
 import { CoursesComponent } from './courses/courses.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContentComponent,
     LoginComponent,
     TasksComponent,
     NotesComponent,
     CoursesComponent,
     DashboardComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

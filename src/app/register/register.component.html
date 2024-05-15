@@ -1,10 +1,10 @@
 <div class="login-container">
   <mat-card class="login-card">
     <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
+      <mat-card-title>Registrieren</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form (ngSubmit)="onSubmitLogin()" #loginForm="ngForm">
+      <form (ngSubmit)="onSubmitRegister()" #registerForm="ngForm">
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Benutzername</mat-label>
           <input matInput placeholder="Ihr Benutzername" [(ngModel)]="username" name="username">
@@ -13,9 +13,8 @@
           <mat-label>Passwort</mat-label>
           <input matInput type="password" placeholder="Ihr Passwort" [(ngModel)]="password" name="password">
         </mat-form-field>
-        <mat-checkbox class="checkbox-style">Angemeldet bleiben</mat-checkbox>
-        <button type="submit" class="login-button">Login</button>
-        <p class="register-text" (click)="goToRegister()">Noch kein Account? Registrieren</p>
+        <button type="submit" class="login-button">Registrieren</button>
+        <p class="register-text" (click)="goToLogin()">Ein Account vorhanden? Hier</p>
       </form>
     </mat-card-content>
   </mat-card>

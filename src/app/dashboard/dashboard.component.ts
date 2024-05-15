@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {AxiosService} from "../axios.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+  constructor(private axiosService: AxiosService, private router: Router) {}
+
+  async logout() {
+    this.axiosService.logout();
+    await this.router.navigate(['/login']);
+  }
 }

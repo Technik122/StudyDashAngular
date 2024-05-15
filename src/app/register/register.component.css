@@ -1,0 +1,69 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('/assets/sea.jpg');
+  background-size: cover;
+}
+
+.hidden {
+  display: none;
+}
+
+.login-card {
+  width: 350px;
+  max-width: 100%;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-card-title {
+  font-size: 24px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.checkbox-style {
+  margin-top: 16px;
+  margin-bottom: 20px;
+}
+
+.login-button {
+  width: 80%;
+  padding: 10px 0;
+  background-color: #0A84FF;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s;
+  display: block;
+  margin: auto;
+}
+
+.login-button:hover {
+  background-color: #0077CC;
+}
+
+.register-text {
+  margin-top: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.register-text a {
+  color: #0A84FF;
+  text-decoration: none;
+}

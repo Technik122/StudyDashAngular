@@ -1,31 +1,32 @@
 import {Component, EventEmitter, Output} from '@angular/core';
+import {AxiosService} from "../axios.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   @Output() onSubmitLoginEvent = new EventEmitter();
-  @Output() onSubmitRegisterEvent = new EventEmitter();
 
-  active: string = "login";
+  constructor(private axiosService: AxiosService, private router: Router) {}
+
   username: string = "";
   password: string = "";
 
-  onLoginTab(): void {
-    this.active = "login";
-  }
-
-  onRegisterTab(): void {
-    this.active = "register";
-  }
-
   onSubmitLogin(): void {
-    this.onSubmitLoginEvent.emit({"username": this.username, "password": this.password });
+    this.axiosService.login({"username": this.username, "password": this.password}).then((response) => {
+      console.log(response);
+      localStorage.setItem('auth_token', response.data.token);
+      this.onSubmitLoginEvent.emit(response);
+      this.router.navigate(['/dashboard']);
+    }).catch((error) => {
+      console.error(error);
+    });
   }
 
-  onSubmitRegister(): void {
-    this.onSubmitRegisterEvent.emit({"username": this.username, "password": this.password });
+  goToRegister(): void {
+    this.router.navigate(['/register']);
   }
 }
