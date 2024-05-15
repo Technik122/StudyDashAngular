@@ -23,6 +23,10 @@ export class AxiosService {
     }
   }
 
+  isLoggedIn(): boolean {
+    return this.getAuthToken() !== null;
+  }
+
   request(method: string, url: string, data: any): Promise<any> {
     let headers: Record<string, string> = {};
 
