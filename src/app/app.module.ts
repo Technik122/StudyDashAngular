@@ -15,14 +15,21 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatCheckbox} from "@angular/material/checkbox";
-
-
+import { TasksComponent } from './tasks/tasks.component';
+import { NotesComponent } from './notes/notes.component';
+import { CoursesComponent } from './courses/courses.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContentComponent,
     LoginComponent,
+    TasksComponent,
+    NotesComponent,
+    CoursesComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +44,8 @@ import {MatCheckbox} from "@angular/material/checkbox";
     MatCard,
     MatCheckbox,
     MatCardActions,
-    MatCardHeader
+    MatCardHeader,
+    MatExpansionModule
   ],
   providers: [AxiosService, provideAnimationsAsync()],
   bootstrap: [AppComponent]

@@ -1,0 +1,28 @@
+<div class="tasks">
+  <h2 class="underlined-heading">Aufgaben</h2>
+  <ul>
+    <li>Mathematik Hausaufgaben</li>
+    <li>Geschichtsprojekt überprüfen</li>
+    <li>Physik-Experiment vorbereiten</li>
+  </ul>
+
+
+
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          ToDo #1
+        </mat-panel-title>
+        <mat-panel-description>
+          Enddatum: blah
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>- Das
+      - Das
+      -dAS</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
