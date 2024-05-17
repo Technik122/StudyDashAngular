@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AxiosService} from "../axios.service";
 import {Router} from "@angular/router";
 
@@ -7,7 +7,7 @@ import {Router} from "@angular/router";
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent{
 
   constructor(private axiosService: AxiosService, private router: Router) {}
 

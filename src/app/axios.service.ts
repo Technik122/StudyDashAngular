@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import axios from 'axios';
-import {HttpClient} from "@angular/common/http";
+import axios, {AxiosResponse} from 'axios';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +12,7 @@ export class AxiosService {
   }
 
   login(credentials: {username: string, password: string}) {
+    localStorage.removeItem("auth_token");
     return this.request('POST', '/login', credentials);
   }
 
@@ -62,5 +62,14 @@ export class AxiosService {
     } catch (error) {
       return false;
     }
+  }
+
+  async getToDosByUser(): Promise<AxiosResponse> {
+    const token = this.getAuthToken();
+    return axios.get('/todos/user', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
   }
 }
