@@ -17,6 +17,14 @@
   position: relative;
 }
 
+.small-button {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1;
+  min-width: auto;
+  background-color: white;
+}
+
 .dashboard-header h1 {
   position: absolute;
   bottom: 10px;
