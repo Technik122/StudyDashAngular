@@ -1,29 +1,31 @@
 <div class="tasks">
-  <h2 class="underlined-heading">Aufgaben</h2>
-
-  <ul>
-    <li *ngFor="let todo of toDos">
-      {{ todo.description }}
-    </li>
-  </ul>
-
-
-
-<!--  <mat-accordion>
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
+  <h2 class="underlined-heading">Aufgaben
+    <button mat-icon-button (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </h2>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let task of tasks">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          ToDo #1
+          {{ task.title }}
         </mat-panel-title>
         <mat-panel-description>
-          Enddatum: blah
+          Enddatum: {{ task.endDate | date:'dd.MM.yyyy' }} <!-- Datumsformat angepasst -->
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>- Das
-      - Das
-      -dAS</p>
+      <div>
+        <p>{{ task.description }}</p>
+        <mat-form-field appearance="fill">
+          <mat-label>Priorität</mat-label>
+          <mat-select [(value)]="task.priority">
+            <mat-option *ngFor="let priority of priorities" [value]="priority">
+              {{ priority }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </mat-expansion-panel>
-  </mat-accordion> -->
+  </mat-accordion>
 </div>
 

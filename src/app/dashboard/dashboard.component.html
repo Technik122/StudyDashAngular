@@ -1,31 +1,25 @@
 <div class="dashboard">
-  <div class="dashboard-header"></div>
-  <button (click)="logout()">Ausloggen</button>
+  <div class="dashboard-header">
+    <h1>JULI'S DASHBOARD</h1>
+  </div>
 
-  <div class="dashboard-leftarea">
-    <div class="top-row">
-      <h1>My Dashboard</h1>
-    </div>
-    <div class="middle-row">
-      <div class="left-column">
-        <app-tasks></app-tasks>
-      </div>
-      <div class="right-column">
-        <app-notes></app-notes>
-      </div>
-    </div>
-    <div class="bottom-row">
-      <app-courses></app-courses>
-    </div>
-
+  <div class="dashboard-content">
+    <app-tasks></app-tasks>
+    <app-notes></app-notes>
+    <app-courses></app-courses>
   </div>
 
   <div class="dashboard-rightarea">
-    <div class="row">
-
+    <div class="calendar">
+      <h3>Calendar / 2024 / May</h3>
+      <!-- Calendar widget will be here -->
     </div>
-    <div class="row">
-
+    <div class="weather">
+      <h3>Hamburg, DE</h3>
+      <div>
+        <span>21°C</span>
+        <span>Sunny</span>
+      </div>
     </div>
   </div>
 </div>

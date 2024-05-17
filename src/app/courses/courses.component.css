@@ -1,13 +1,30 @@
+.courses {
+  padding: 20px;
+}
+
 .underlined-heading {
-  position: relative; /* Positionierung relativ zum Elternelement */
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .underlined-heading::after {
-  content: ""; /* Fügt kein zusätzliches Inhaltselement ein */
-  position: absolute; /* Positionierung relativ zum Elternelement */
-  bottom: -5px; /* Position unterhalb des Texts */
-  left: 0; /* Beginnt am linken Rand */
-  width: 100%; /* Nimmt die gesamte Breite des Elternelements ein */
-  height: 2px; /* Höhe des Unterstrichs */
-  background-color: black; /* Farbe des Unterstrichs */
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+}
+
+.course-list {
+  display: flex;
+  gap: 10px;
+}
+
+.course-list div {
+  flex: 1;
+  height: 100px;
+  background-color: #e0e0e0;
 }

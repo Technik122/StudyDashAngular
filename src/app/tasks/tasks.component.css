@@ -1,25 +1,11 @@
-.tasks ul {
-  list-style: none; /* Entfernt die Standard-Bullet-Points */
-  padding: 0;
-  margin: 0;
-}
-
-.tasks li {
-  position: relative; /* Ermöglicht das Positionieren der Pseudo-Elemente */
-  padding-left: 20px; /* Gibt ein wenig Raum am linken Rand */
-  height: 40px; /* Stellt die Höhe jeder Zeile ein */
-  line-height: 40px; /* Zentriert den Text vertikal */
-  border-bottom: 1px solid #ccc; /* Fügt die Linie unter jedem Listenelement hinzu */
-  margin-bottom: 10px; /* Abstand zwischen den Elementen */
-}
-
-.tasks li:last-child {
-  border-bottom: none; /* Entfernt die Linie vom letzten Listenelement */
+.tasks {
+  padding: 20px;
 }
 
 .underlined-heading {
   position: relative;
   padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .underlined-heading::after {
@@ -30,4 +16,8 @@
   width: 100%;
   height: 2px;
   background-color: black;
+}
+
+.mat-accordion .mat-expansion-panel-header {
+  font-weight: bold;
 }
