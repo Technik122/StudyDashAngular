@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Neue Aufgabe hinzufügen</h2>
+<mat-dialog-content>
+  <form [formGroup]="taskForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Titel</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Beschreibung</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Enddatum</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="endDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Priorität</mat-label>
+      <mat-select formControlName="priority">
+        <mat-option value="Hoch">Hoch</mat-option>
+        <mat-option value="Mittel">Mittel</mat-option>
+        <mat-option value="Niedrig">Niedrig</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Abbrechen</button>
+  <button mat-button (click)="onSave()" [disabled]="!taskForm.valid">Speichern</button>
+</mat-dialog-actions>

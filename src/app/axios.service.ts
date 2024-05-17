@@ -13,6 +13,7 @@ export class AxiosService {
   }
 
   login(credentials: {username: string, password: string}) {
+    localStorage.removeItem("auth_token");
     return this.request('POST', '/login', credentials);
   }
 

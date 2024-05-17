@@ -1,6 +1,26 @@
 <div class="notes">
-  <h2 class="underlined-heading">Notizen</h2>
-  <ul>
-  </ul>
+  <h2 class="underlined-heading">Notizen
+    <button mat-icon-button (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </h2>
+  <div class="note-list">
+    <mat-card *ngFor="let note of notes" class="note-card">
+      <mat-card-header>
+        <mat-card-title>{{ note.title }}</mat-card-title>
+        <mat-card-subtitle>{{ note.date | date:'dd.MM.yyyy' }}</mat-card-subtitle> <!-- Datumsformat angepasst -->
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ note.content }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-icon-button (click)="editNote(note)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteNote(note)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
-

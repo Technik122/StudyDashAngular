@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{ data.isEdit ? 'Notiz bearbeiten' : 'Neue Notiz hinzufügen' }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="noteForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Titel</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Inhalt</mat-label>
+      <textarea matInput formControlName="content"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Datum</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Abbrechen</button>
+  <button mat-button (click)="onSave()" [disabled]="!noteForm.valid">Speichern</button>
+</mat-dialog-actions>
