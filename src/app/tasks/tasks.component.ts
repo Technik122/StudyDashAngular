@@ -25,7 +25,7 @@ import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
   }*/
   export class TasksComponent {
   panelOpenState = false;
-  priorities = ['Hoch', 'Mittel', 'Niedrig'];
+  priorities = ['HOCH', 'MITTEL', 'NIEDRIG'];
   tasks: ToDo[] = [
     /*{
       title: 'Mathematik Hausaufgaben',
@@ -60,9 +60,11 @@ import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
       data: {}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(async (result: ToDo) => {
       if (result) {
-        this.tasks.push(result);
+        await this.axiosService.createToDo(result);
+        const response = await this.axiosService.getToDosByUser();
+        this.tasks = response.data;
       }
     });
   }

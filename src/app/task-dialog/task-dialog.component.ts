@@ -16,7 +16,6 @@ export class TaskDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.taskForm = this.fb.group({
-      title: ['', Validators.required],
       description: ['', Validators.required],
       deadLine: ['', Validators.required],
       priority: ['', Validators.required]

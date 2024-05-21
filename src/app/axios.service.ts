@@ -72,4 +72,13 @@ export class AxiosService {
       }
     })
   }
+
+  async createToDo(todo: any): Promise<AxiosResponse> {
+    const token = this.getAuthToken();
+    return axios.post('/todos/add', todo, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+  }
 }

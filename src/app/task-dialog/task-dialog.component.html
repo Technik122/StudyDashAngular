@@ -2,11 +2,6 @@
 <mat-dialog-content>
   <form [formGroup]="taskForm">
     <mat-form-field appearance="fill">
-      <mat-label>Titel</mat-label>
-      <input matInput formControlName="title">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
       <mat-label>Beschreibung</mat-label>
       <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
@@ -21,9 +16,9 @@
     <mat-form-field appearance="fill">
       <mat-label>Priorität</mat-label>
       <mat-select formControlName="priority">
-        <mat-option value="Hoch">Hoch</mat-option>
-        <mat-option value="Mittel">Mittel</mat-option>
-        <mat-option value="Niedrig">Niedrig</mat-option>
+        <mat-option value="HOCH">Hoch</mat-option>
+        <mat-option value="MITTEL">Mittel</mat-option>
+        <mat-option value="NIEDRIG">Niedrig</mat-option>
       </mat-select>
     </mat-form-field>
   </form>
