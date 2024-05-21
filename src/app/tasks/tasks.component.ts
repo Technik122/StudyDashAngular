@@ -26,8 +26,8 @@ import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
   export class TasksComponent {
   panelOpenState = false;
   priorities = ['Hoch', 'Mittel', 'Niedrig'];
-  tasks = [
-    {
+  tasks: ToDo[] = [
+    /*{
       title: 'Mathematik Hausaufgaben',
       endDate: '2024-05-20',
       description: 'Lösen Sie die Aufgaben im Buch Kapitel 3',
@@ -44,10 +44,15 @@ import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
       endDate: '2024-05-30',
       description: 'Bereiten Sie das Experiment für die Klasse vor',
       priority: 'Niedrig'
-    }
+    }*/
   ];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private axiosService: AxiosService) {}
+
+  async ngOnInit() {
+    const response = await this.axiosService.getToDosByUser();
+    this.tasks = response.data;
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TaskDialogComponent, {

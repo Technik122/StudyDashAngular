@@ -8,10 +8,10 @@
     <mat-expansion-panel *ngFor="let task of tasks">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ task.title }}
+          {{ task.description }}
         </mat-panel-title>
         <mat-panel-description>
-          Enddatum: {{ task.endDate | date:'dd.MM.yyyy' }} <!-- Datumsformat angepasst -->
+          Enddatum: {{ task.deadLine | date:'dd.MM.yyyy' }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div>

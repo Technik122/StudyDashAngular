@@ -18,7 +18,7 @@ export class TaskDialogComponent {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      endDate: ['', Validators.required],
+      deadLine: ['', Validators.required],
       priority: ['', Validators.required]
     });
   }
