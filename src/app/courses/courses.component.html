@@ -1,9 +1,22 @@
 <div class="courses">
-  <h2 class="underlined-heading">Kurse</h2>
+  <h2 class="underlined-heading">Kurse
+    <button mat-icon-button (click)="openCourseDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </h2>
   <div class="course-list">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+    <mat-card *ngFor="let course of courses" class="course-card">
+      <mat-card-header>
+        <mat-card-title>{{ course.name }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-actions>
+        <button mat-icon-button (click)="editCourse(course)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteCourse(course)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>

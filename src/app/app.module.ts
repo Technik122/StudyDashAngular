@@ -29,6 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NoteDialogComponent } from './note-dialog/note-dialog.component';
+import { CourseDialogComponent} from "./course-dialog/course-dialog.component";
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { NoteDialogComponent } from './note-dialog/note-dialog.component';
     RegisterComponent,
     TaskDialogComponent,
     NoteDialogComponent,
+    CourseDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,7 @@ import { NoteDialogComponent } from './note-dialog/note-dialog.component';
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   providers: [AxiosService, provideAnimationsAsync()],
   bootstrap: [AppComponent]
