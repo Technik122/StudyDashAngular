@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
+import {AxiosService} from "../axios.service";
+import {Note} from "../note";
 
 @Component({
   selector: 'app-notes',
@@ -8,46 +10,46 @@ import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
   styleUrls: ['./notes.component.css']
 })
 export class NotesComponent {
-  notes = [
-    { title: 'Einkaufsliste', content: 'Milch, Brot, Eier', date: new Date() },
-    { title: 'Projektideen', content: 'Neues App-Design', date: new Date() }
-  ];
+  notes: Note[] = [];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private axiosService: AxiosService) {}
 
-  openDialog(): void {
+  async ngOnInit() {
+    const response = await this.axiosService.getNotesByUser();
+    this.notes = response.data;
+  }
+
+  async openNoteDialog(): Promise<void> {
     const dialogRef = this.dialog.open(NoteDialogComponent, {
       width: '400px',
       data: { isEdit: false }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.notes.push(result);
-      }
+    dialogRef.afterClosed().subscribe(async result => {
+      await this.axiosService.createNote(result)
+      const response = await this.axiosService.getNotesByUser();
+      this.notes = response.data;
     });
   }
 
-  editNote(note: { title: string; }): void {
+  async editNote(note: Note): Promise<void> {
     const dialogRef = this.dialog.open(NoteDialogComponent, {
       width: '400px',
       data: { ...note, isEdit: true }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(async result => {
       if (result) {
-        const index = this.notes.findIndex(n => n.title === note.title);
-        if (index > -1) {
-          this.notes[index] = result;
-        }
+        await this.axiosService.updateNote(note.id, result);
+        const response = await this.axiosService.getNotesByUser();
+        this.notes = response.data;
       }
     });
   }
 
-  deleteNote(note: { title: string; }): void {
-    const index = this.notes.findIndex(n => n.title === note.title);
-    if (index > -1) {
-      this.notes.splice(index, 1);
-    }
+  async deleteNote(note: Note): Promise<void> {
+    await this.axiosService.deleteNote(note.id);
+    const response = await this.axiosService.getNotesByUser();
+    this.notes = response.data;
   }
 }

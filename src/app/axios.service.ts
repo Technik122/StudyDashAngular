@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios, {AxiosResponse} from 'axios';
 import {ToDo} from "./to-do";
 import {Course} from "./course";
+import {Note} from "./note";
 
 @Injectable({
   providedIn: 'root'
@@ -96,5 +97,21 @@ export class AxiosService {
 
   async updateCourse(id: number, updatedCourse: Course): Promise<AxiosResponse> {
     return this.request('PUT', `/courses/update/${id}`, updatedCourse);
+  }
+
+  async getNotesByUser(): Promise<AxiosResponse> {
+    return this.request('GET', '/notes/get', null);
+  }
+
+  async createNote(note: Note): Promise<AxiosResponse> {
+    return this.request('POST', '/notes/add', note);
+  }
+
+  async deleteNote(id: number): Promise<AxiosResponse> {
+    return this.request('DELETE', `/notes/delete/${id}`, null);
+  }
+
+  async updateNote(id: number, updatedNote: Note): Promise<AxiosResponse> {
+    return this.request('PUT', `/notes/update/${id}`, updatedNote);
   }
 }

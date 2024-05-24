@@ -22,6 +22,18 @@ export class NoteDialogComponent {
     });
   }
 
+  ngOnInit(): void {
+    if (this.data.isEdit) {
+      let noteDate = this.data.date ? new Date(this.data.date) : null;
+
+      this.noteForm.patchValue({
+        title: this.data.title,
+        content: this.data.content,
+        date: noteDate
+      });
+    }
+  }
+
   onCancel(): void {
     this.dialogRef.close();
   }
