@@ -30,6 +30,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NoteDialogComponent } from './note-dialog/note-dialog.component';
 import { CourseDialogComponent} from "./course-dialog/course-dialog.component";
+import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CourseDialogComponent} from "./course-dialog/course-dialog.component";
     RegisterComponent,
     TaskDialogComponent,
     NoteDialogComponent,
-    CourseDialogComponent
+    CourseDialogComponent,
+    ConfirmDeleteDialogComponent
   ],
   imports: [
     BrowserModule,

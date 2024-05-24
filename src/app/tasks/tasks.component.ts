@@ -3,6 +3,7 @@ import {AxiosService} from "../axios.service";
 import {ToDo} from "../to-do";
 import {MatDialog} from "@angular/material/dialog";
 import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
+import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
 
 @Component({
   selector: 'app-tasks',
@@ -57,7 +58,17 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  async deleteTask(id: number) {
+  async confirmDeleteTask(id: number): Promise<void> {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent);
+
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result) {
+        await this.deleteTask(id);
+      }
+    });
+  }
+
+  protected async deleteTask(id: number): Promise<void> {
     await this.axiosService.deleteToDo(id);
     const response = await this.axiosService.getToDosByUser();
     this.toDos = response.data.filter((todo: ToDo) => !todo.completed);

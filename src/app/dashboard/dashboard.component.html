@@ -15,11 +15,11 @@
       <!-- Calendar widget will be here -->
     </div>
     <div class="weather">
-      <h3>Hamburg, DE</h3>
-      <div>
-        <span>21°C</span>
-        <span>Sunny</span>
-      </div>
+      <h3>Wettervorhersage</h3>
+      <input type="text" [(ngModel)]="location" placeholder="Geben Sie einen Ort ein" />
+      <button (click)="updateWeatherWidget()">Aktualisieren</button>
+      <!-- Wetter Widget hier einfügen -->
+      <a class="weatherwidget-io" [attr.href]="weatherWidgetUrl" data-label_1="WETTER" data-label_2="WOCHENÜBERSICHT" data-days="5">WETTER</a>
     </div>
   </div>
 </div>

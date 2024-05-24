@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
 import {AxiosService} from "../axios.service";
 import {Note} from "../note";
+import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
 
 @Component({
   selector: 'app-notes',
@@ -47,7 +48,17 @@ export class NotesComponent {
     });
   }
 
-  async deleteNote(note: Note): Promise<void> {
+  async confirmDeleteNote(note: Note): Promise<void> {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent);
+
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result) {
+        await this.deleteNote(note);
+      }
+    });
+  }
+
+  private async deleteNote(note: Note): Promise<void> {
     await this.axiosService.deleteNote(note.id);
     const response = await this.axiosService.getNotesByUser();
     this.notes = response.data;

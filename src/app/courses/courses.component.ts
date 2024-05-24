@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
 import {AxiosService} from "../axios.service";
 import {Course} from "../course";
+import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
 
 @Component({
   selector: 'app-courses',
@@ -49,7 +50,17 @@ export class CoursesComponent {
     });
   }
 
-  async deleteCourse(course: Course): Promise<void> {
+  async confirmDeleteCourse(course: Course): Promise<void> {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent);
+
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result) {
+        await this.deleteCourse(course);
+      }
+    });
+  }
+
+  private async deleteCourse(course: Course): Promise<void> {
     await this.axiosService.deleteCourse(course.id);
     const response = await this.axiosService.getCoursesByUser();
     this.courses = response.data;
