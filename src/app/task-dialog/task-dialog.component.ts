@@ -22,6 +22,20 @@ export class TaskDialogComponent {
     });
   }
 
+  ngOnInit(): void {
+    if (this.data.isEdit) {
+      let deadLineDate = this.data.deadLine ?
+        new Date(this.data.deadLine) : null;
+
+      this.taskForm.patchValue({
+        description: this.data.description,
+        deadLine: deadLineDate,
+        priority: this.data.priority
+      });
+    }
+  }
+
+
   onCancel(): void {
     this.dialogRef.close();
   }

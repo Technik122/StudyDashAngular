@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios, {AxiosResponse} from 'axios';
+import {ToDo} from "./to-do";
 
 @Injectable({
   providedIn: 'root'
@@ -65,29 +66,18 @@ export class AxiosService {
   }
 
   async getToDosByUser(): Promise<AxiosResponse> {
-    const token = this.getAuthToken();
-    return axios.get('/todos/user', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
+    return this.request('GET', '/todos/user', null);
   }
 
   async createToDo(todo: any): Promise<AxiosResponse> {
-    const token = this.getAuthToken();
-    return axios.post('/todos/add', todo, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
+    return this.request('POST', '/todos/add', todo);
   }
 
   async deleteToDo(id: number): Promise<AxiosResponse> {
-    const token = this.getAuthToken();
-    return axios.delete(`/todos/delete/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
+    return this.request('DELETE', `/todos/delete/${id}`, null);
+  }
+
+  async updateToDo(id: number, updatedToDo: ToDo): Promise<AxiosResponse> {
+    return this.request('PUT', `/todos/update/${id}`, updatedToDo);
   }
 }
