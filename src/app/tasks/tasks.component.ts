@@ -68,4 +68,28 @@ import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
       }
     });
   }
+
+  editTask(task: { description: string; }): void {
+    const dialogRef = this.dialog.open(TaskDialogComponent, {
+      width: '400px',
+      data: { ...task, isEdit: true }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const index = this.tasks.findIndex(t => t.description === task.description);
+        if (index > -1) {
+          this.tasks[index] = result;
+        }
+      }
+    });
+  }
+
+  deleteTask(task: { description: string; }): void {
+    const index = this.tasks.findIndex(t => t.description === task.description);
+    if (index > -1) {
+      this.tasks.splice(index, 1);
+    }
+  }
+
 }
