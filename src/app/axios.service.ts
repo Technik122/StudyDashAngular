@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios, {AxiosResponse} from 'axios';
 import {ToDo} from "./to-do";
+import {Course} from "./course";
 
 @Injectable({
   providedIn: 'root'
@@ -69,7 +70,7 @@ export class AxiosService {
     return this.request('GET', '/todos/user', null);
   }
 
-  async createToDo(todo: any): Promise<AxiosResponse> {
+  async createToDo(todo: ToDo): Promise<AxiosResponse> {
     return this.request('POST', '/todos/add', todo);
   }
 
@@ -79,5 +80,21 @@ export class AxiosService {
 
   async updateToDo(id: number, updatedToDo: ToDo): Promise<AxiosResponse> {
     return this.request('PUT', `/todos/update/${id}`, updatedToDo);
+  }
+
+  async getCoursesByUser(): Promise<AxiosResponse> {
+    return this.request('GET', '/courses/get', null);
+  }
+
+  async createCourse(course: Course): Promise<AxiosResponse> {
+    return this.request('POST', '/courses/add', course);
+  }
+
+  async deleteCourse(id: number): Promise<AxiosResponse> {
+    return this.request('DELETE', `/courses/delete/${id}`, null);
+  }
+
+  async updateCourse(id: number, updatedCourse: Course): Promise<AxiosResponse> {
+    return this.request('PUT', `/courses/update/${id}`, updatedCourse);
   }
 }

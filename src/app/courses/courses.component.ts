@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
+import {AxiosService} from "../axios.service";
+import {Course} from "../course";
 
 @Component({
   selector: 'app-courses',
@@ -8,46 +10,48 @@ import { CourseDialogComponent } from '../course-dialog/course-dialog.component'
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent {
-  courses = [
-    { name: 'Mathematik' },
-    { name: 'Informatik' }
-  ];
+  courses: Course[] = [];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private axiosService: AxiosService) {}
 
-  openCourseDialog(): void {
+  async ngOnInit() {
+    const response = await this.axiosService.getCoursesByUser();
+    this.courses = response.data;
+  }
+
+  async openCourseDialog(): Promise<void> {
     const dialogRef = this.dialog.open(CourseDialogComponent, {
       width: '400px',
       data: { isEdit: false }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(async result => {
       if (result) {
-        this.courses.push(result);
+        await this.axiosService.createCourse(result)
+        const response = await this.axiosService.getCoursesByUser();
+        this.courses = response.data;
       }
     });
   }
 
-  editCourse(course: { name: string; }): void {
+  async editCourse(course: Course): Promise<void> {
     const dialogRef = this.dialog.open(CourseDialogComponent, {
       width: '400px',
       data: { ...course, isEdit: true }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(async result => {
       if (result) {
-        const index = this.courses.findIndex(c => c.name === course.name);
-        if (index > -1) {
-          this.courses[index] = result;
-        }
+        await this.axiosService.updateCourse(course.id, result);
+        const response = await this.axiosService.getCoursesByUser();
+        this.courses = response.data;
       }
     });
   }
 
-  deleteCourse(course: { name: string; }): void {
-    const index = this.courses.findIndex(c => c.name === course.name);
-    if (index > -1) {
-      this.courses.splice(index, 1);
-    }
+  async deleteCourse(course: Course): Promise<void> {
+    await this.axiosService.deleteCourse(course.id);
+    const response = await this.axiosService.getCoursesByUser();
+    this.courses = response.data;
   }
 }
