@@ -9,16 +9,37 @@ import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css',
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit {
   priorities = ['HOCH', 'MITTEL', 'NIEDRIG'];
   toDos: ToDo[] = [];
+  completedToDos: ToDo[] = [];
+
+  showCompleted: boolean = false;
 
   constructor(public dialog: MatDialog, private axiosService: AxiosService) {}
 
   async ngOnInit() {
     const response = await this.axiosService.getToDosByUser();
-    this.toDos = response.data;
+    this.toDos = response.data.filter((todo: ToDo) => !todo.completed);
+    this.completedToDos = response.data.filter((todo: ToDo) => todo.completed);
   }
+
+  async markAsCompleted(toDo: ToDo) {
+    toDo.completed = true;
+    await this.axiosService.updateToDo(toDo.id, toDo);
+    const response = await this.axiosService.getToDosByUser();
+    this.toDos = response.data.filter((todo: ToDo) => !todo.completed);
+    this.completedToDos = response.data.filter((todo: ToDo) => todo.completed);
+  }
+
+  async markAsUncompleted(toDo: ToDo) {
+    toDo.completed = false;
+    await this.axiosService.updateToDo(toDo.id, toDo);
+    const response = await this.axiosService.getToDosByUser();
+    this.toDos = response.data.filter((todo: ToDo) => !todo.completed);
+    this.completedToDos = response.data.filter((todo: ToDo) => todo.completed);
+  }
+
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TaskDialogComponent, {
@@ -30,7 +51,8 @@ export class TasksComponent {
       if (result) {
         await this.axiosService.createToDo(result);
         const response = await this.axiosService.getToDosByUser();
-        this.toDos = response.data;
+        this.toDos = response.data.filter((todo: ToDo) => !todo.completed);
+        this.completedToDos = response.data.filter((todo: ToDo) => todo.completed);
       }
     });
   }
@@ -38,7 +60,8 @@ export class TasksComponent {
   async deleteTask(id: number) {
     await this.axiosService.deleteToDo(id);
     const response = await this.axiosService.getToDosByUser();
-    this.toDos = response.data;
+    this.toDos = response.data.filter((todo: ToDo) => !todo.completed);
+    this.completedToDos = response.data.filter((todo: ToDo) => todo.completed);
   }
 
   async editTask(task: ToDo) {
@@ -51,8 +74,13 @@ export class TasksComponent {
       if (result) {
         await this.axiosService.updateToDo(task.id, result);
         const response = await this.axiosService.getToDosByUser();
-        this.toDos = response.data;
+        this.toDos = response.data.filter((todo: ToDo) => !todo.completed);
+        this.completedToDos = response.data.filter((todo: ToDo) => todo.completed);
       }
     });
+  }
+
+  toggleCompleted(): void {
+    this.showCompleted = !this.showCompleted;
   }
 }

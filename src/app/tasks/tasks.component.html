@@ -25,6 +25,9 @@
           </mat-select>
         </mat-form-field>
         <div class="task-actions">
+          <button mat-icon-button (click)="markAsCompleted(todo)">
+            <mat-icon>check</mat-icon>
+          </button>
           <button mat-icon-button (click)="editTask(todo)">
             <mat-icon>edit</mat-icon>
           </button>
@@ -34,5 +37,42 @@
         </div>
       </div>
     </mat-expansion-panel>
+
+    <button mat-button (click)="toggleCompleted()">
+      {{ showCompleted ? 'Erdledigte Aufgaben ausblenden' : 'Erledigte Aufgaben anzeigen' }}
+    </button>
+    <div class="trenner" *ngIf="showCompleted"></div>
+
+    <ng-container  *ngIf="showCompleted">
+    <mat-expansion-panel *ngFor="let todo of completedToDos" class="completed-task">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ todo.description }}
+        </mat-panel-title>
+        <mat-panel-description>
+          Enddatum: {{ todo.deadLine | date:'dd.MM.yyyy' }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div>
+        <!-- hier Subtasks -->
+        <mat-form-field appearance="fill">
+          <mat-label>Priorität</mat-label>
+          <mat-select [(value)]="todo.priority">
+            <mat-option *ngFor="let priority of priorities" [value]="priority">
+              {{ priority }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="task-actions">
+          <button mat-icon-button (click)="markAsUncompleted(todo)">
+            <mat-icon>undo</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteTask(todo.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    </ng-container>
   </mat-accordion>
 </div>
