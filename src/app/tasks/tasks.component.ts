@@ -68,4 +68,10 @@ import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
       }
     });
   }
+
+  async deleteTask(id: number) {
+    await this.axiosService.deleteToDo(id);
+    const response = await this.axiosService.getToDosByUser();
+    this.tasks = response.data;
+  }
 }

@@ -81,4 +81,13 @@ export class AxiosService {
       }
     })
   }
+
+  async deleteToDo(id: number): Promise<AxiosResponse> {
+    const token = this.getAuthToken();
+    return axios.delete(`/todos/delete/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+  }
 }
