@@ -15,7 +15,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div>
-       <!-- hier Subtasks -->
+        <!-- hier Subtasks -->
         <mat-form-field appearance="fill">
           <mat-label>Priorität</mat-label>
           <mat-select [(value)]="task.priority">
@@ -24,8 +24,15 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <div class="task-actions">
+          <button mat-icon-button (click)="editTask(task)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteTask(task)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
-
