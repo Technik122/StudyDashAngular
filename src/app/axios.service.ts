@@ -3,6 +3,7 @@ import axios, {AxiosResponse} from 'axios';
 import {ToDo} from "./to-do";
 import {Course} from "./course";
 import {Note} from "./note";
+import {Subtask} from "./subtask";
 
 @Injectable({
   providedIn: 'root'
@@ -113,5 +114,21 @@ export class AxiosService {
 
   async updateNote(id: number, updatedNote: Note): Promise<AxiosResponse> {
     return this.request('PUT', `/notes/update/${id}`, updatedNote);
+  }
+
+  async getSubtasksByToDoId(toDoId: number): Promise<AxiosResponse> {
+    return this.request('GET', `/todos/${toDoId}/subtasks/get`, null);
+  }
+
+  async createSubtask(toDoId: number, subtask: Subtask): Promise<AxiosResponse> {
+    return this.request('POST', `/todos/${toDoId}/subtasks/add`, subtask);
+  }
+
+  async updateSubtask(subtaskId: number, updatedSubtask: Subtask): Promise<AxiosResponse> {
+    return this.request('PUT', `/subtasks/update/${subtaskId}`, updatedSubtask);
+  }
+
+  async deleteSubtask(subtaskId: number): Promise<AxiosResponse> {
+    return this.request('DELETE', `/subtasks/delete/${subtaskId}`, null);
   }
 }

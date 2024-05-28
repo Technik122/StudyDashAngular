@@ -15,7 +15,8 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div>
-        <!-- hier Subtasks -->
+        <app-subtask *ngFor="let subtask of todo.subtasks" [subtask]="subtask"></app-subtask>
+        <input placeholder="Neue Subtask hinzufügen" (keydown.enter)="addSubtask(todo.id, $event.target.value)" />
         <mat-form-field appearance="fill">
           <mat-label>Priorität</mat-label>
           <mat-select [(value)]="todo.priority">
@@ -39,7 +40,7 @@
     </mat-expansion-panel>
 
     <button mat-button (click)="toggleCompleted()">
-      {{ showCompleted ? 'Erdledigte Aufgaben ausblenden' : 'Erledigte Aufgaben anzeigen' }}
+      {{ showCompleted ? 'Erledigte Aufgaben ausblenden' : 'Erledigte Aufgaben anzeigen' }}
     </button>
     <div class="trenner" *ngIf="showCompleted"></div>
 
@@ -67,7 +68,7 @@
           <button mat-icon-button (click)="markAsUncompleted(todo)">
             <mat-icon>undo</mat-icon>
           </button>
-          <button mat-icon-button (click)="deleteTask(todo.id)">
+          <button mat-icon-button (click)="confirmDeleteTask(todo.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </div>

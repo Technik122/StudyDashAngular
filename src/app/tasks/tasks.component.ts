@@ -68,7 +68,7 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  protected async deleteTask(id: number): Promise<void> {
+  async deleteTask(id: number): Promise<void> {
     await this.axiosService.deleteToDo(id);
     const response = await this.axiosService.getToDosByUser();
     this.toDos = response.data.filter((todo: ToDo) => !todo.completed);
@@ -93,5 +93,9 @@ export class TasksComponent implements OnInit {
 
   toggleCompleted(): void {
     this.showCompleted = !this.showCompleted;
+  }
+
+  async updateSubtasks(toDoId: number) {
+    const response = await this.axiosService.getSubtasksByToDoId(toDoId);
   }
 }

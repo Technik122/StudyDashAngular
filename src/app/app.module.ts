@@ -31,6 +31,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { NoteDialogComponent } from './note-dialog/note-dialog.component';
 import { CourseDialogComponent} from "./course-dialog/course-dialog.component";
 import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-delete-dialog.component';
+import { SubtaskComponent } from './subtask/subtask.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-de
     TaskDialogComponent,
     NoteDialogComponent,
     CourseDialogComponent,
-    ConfirmDeleteDialogComponent
+    ConfirmDeleteDialogComponent,
+    SubtaskComponent
   ],
   imports: [
     BrowserModule,
