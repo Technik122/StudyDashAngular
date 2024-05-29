@@ -15,16 +15,15 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div>
-        <app-subtask *ngFor="let subtask of todo.subtasks" [subtask]="subtask"></app-subtask>
-        <input placeholder="Neue Subtask hinzufügen" (keydown.enter)="addSubtask(todo.id, $event.target.value)" />
-        <mat-form-field appearance="fill">
+
+        <div *ngFor="let subtask of todo.subtasks">
+          <mat-checkbox [checked]="subtask.completed">{{ subtask.description }}</mat-checkbox>
+        </div>
+
           <mat-label>Priorität</mat-label>
-          <mat-select [(value)]="todo.priority">
-            <mat-option *ngFor="let priority of priorities" [value]="priority">
-              {{ priority }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <br>
+        <strong>{{todo.priority}}</strong>
+
         <div class="task-actions">
           <button mat-icon-button (click)="markAsCompleted(todo)">
             <mat-icon>check</mat-icon>

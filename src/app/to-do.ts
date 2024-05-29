@@ -6,5 +6,5 @@ export interface ToDo {
   completed: boolean;
   deadLine: string;
   priority: string;
-  subtasks: Subtask[];
+  subtasks?: Subtask[];
 }

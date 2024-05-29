@@ -4,6 +4,7 @@ import {ToDo} from "../to-do";
 import {MatDialog} from "@angular/material/dialog";
 import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
 import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
+import {Subtask} from "../subtask";
 
 @Component({
   selector: 'app-tasks',
@@ -14,6 +15,7 @@ export class TasksComponent implements OnInit {
   priorities = ['HOCH', 'MITTEL', 'NIEDRIG'];
   toDos: ToDo[] = [];
   completedToDos: ToDo[] = [];
+  subtasks: Subtask[] = [];
 
   showCompleted: boolean = false;
 
@@ -23,6 +25,16 @@ export class TasksComponent implements OnInit {
     const response = await this.axiosService.getToDosByUser();
     this.toDos = response.data.filter((todo: ToDo) => !todo.completed);
     this.completedToDos = response.data.filter((todo: ToDo) => todo.completed);
+
+    for (let todo of this.toDos) {
+      const subtasksResponse = await this.axiosService.getSubtasksByToDoId(todo.id);
+      todo.subtasks = subtasksResponse.data;
+    }
+
+    for (let todo of this.completedToDos) {
+      const subtasksResponse = await this.axiosService.getSubtasksByToDoId(todo.id);
+      todo.subtasks = subtasksResponse.data;
+    }
   }
 
   async markAsCompleted(toDo: ToDo) {
@@ -97,5 +109,10 @@ export class TasksComponent implements OnInit {
 
   async updateSubtasks(toDoId: number) {
     const response = await this.axiosService.getSubtasksByToDoId(toDoId);
+  }
+
+  async getSubtasks(toDo: ToDo) {
+    const response = await this.axiosService.getSubtasksByToDoId(toDo.id);
+    return response.data;
   }
 }

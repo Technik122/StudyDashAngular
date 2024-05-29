@@ -81,9 +81,22 @@ export class AxiosService {
   }
 
   async updateToDo(id: number, updatedToDo: ToDo): Promise<AxiosResponse> {
-    return this.request('PUT', `/todos/update/${id}`, updatedToDo);
-  }
+    const todoResponse = await this.request('PUT', `/todos/update/${id}`, updatedToDo);
 
+    if (updatedToDo.subtasks) {
+      const existingSubtasksResponse = await this.getSubtasksByToDoId(id);
+      const existingSubtaskIds = existingSubtasksResponse.data.map((subtask: Subtask) => subtask.id);
+
+      for (let subtask of updatedToDo.subtasks) {
+        if (subtask.id && existingSubtaskIds.includes(subtask.id)) {
+          await this.updateSubtask(subtask.id, subtask);
+        } else {
+          await this.createSubtask(todoResponse.data.id, subtask);
+        }
+      }
+    }
+    return todoResponse;
+  }
   async getCoursesByUser(): Promise<AxiosResponse> {
     return this.request('GET', '/courses/get', null);
   }

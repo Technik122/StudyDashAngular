@@ -9,22 +9,7 @@ import {TasksComponent} from "../tasks/tasks.component";
   styleUrl: './subtask.component.css'
 })
 export class SubtaskComponent {
-  @Input() subtask!: Subtask;
-  private tasksComponent: TasksComponent;
 
   constructor(private axiosService: AxiosService) {}
 
-  async updateSubtask() {
-    await this.axiosService.updateSubtask(this.subtask.id, this.subtask);
-  }
-
-  async addSubtask(todoId: number, description: string) {
-    const newSubtask: Subtask = {
-      description: description,
-      completed: false
-    };
-
-    await this.axiosService.createSubtask(todoId, newSubtask);
-    await this.tasksComponent.updateSubtasks(todoId);
-  }
 }
