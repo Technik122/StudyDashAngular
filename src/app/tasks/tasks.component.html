@@ -16,9 +16,7 @@
       </mat-expansion-panel-header>
       <div>
 
-        <div *ngFor="let subtask of todo.subtasks">
-          <mat-checkbox [checked]="subtask.completed">{{ subtask.description }}</mat-checkbox>
-        </div>
+        <app-subtask *ngFor="let subtask of todo.subtasks" [subtask]="subtask"></app-subtask>
 
           <mat-label>Priorität</mat-label>
         <br>

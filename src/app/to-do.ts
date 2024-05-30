@@ -1,7 +1,7 @@
 import {Subtask} from "./subtask";
 
 export interface ToDo {
-  id: number;
+  id: string;
   description: string;
   completed: boolean;
   deadLine: string;

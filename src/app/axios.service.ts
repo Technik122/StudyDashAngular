@@ -21,6 +21,7 @@ export class AxiosService {
   }
 
   register(credentials: {username: string, password: string}) {
+    localStorage.removeItem("auth_token");
     return this.request('POST', '/register', credentials);
   }
 
@@ -76,22 +77,31 @@ export class AxiosService {
     return this.request('POST', '/todos/add', todo);
   }
 
-  async deleteToDo(id: number): Promise<AxiosResponse> {
+  async deleteToDo(id: string): Promise<AxiosResponse> {
     return this.request('DELETE', `/todos/delete/${id}`, null);
   }
 
-  async updateToDo(id: number, updatedToDo: ToDo): Promise<AxiosResponse> {
+  async updateToDo(id: string, updatedToDo: ToDo): Promise<AxiosResponse> {
     const todoResponse = await this.request('PUT', `/todos/update/${id}`, updatedToDo);
 
     if (updatedToDo.subtasks) {
       const existingSubtasksResponse = await this.getSubtasksByToDoId(id);
-      const existingSubtaskIds = existingSubtasksResponse.data.map((subtask: Subtask) => subtask.id);
+      const existingSubtasks = existingSubtasksResponse.data;
 
-      for (let subtask of updatedToDo.subtasks) {
-        if (subtask.id && existingSubtaskIds.includes(subtask.id)) {
-          await this.updateSubtask(subtask.id, subtask);
+      const updatedSubtaskIds = updatedToDo.subtasks.map((subtask: Subtask) => subtask.id);
+      const existingSubtaskIds = existingSubtasks.map((subtask: Subtask) => subtask.id);
+
+      for (let existingSubtask of existingSubtasks) {
+        if (!updatedSubtaskIds.includes(existingSubtask.id)) {
+          await this.deleteSubtask(existingSubtask.id);
+        }
+      }
+
+      for (let updatedSubtask of updatedToDo.subtasks) {
+        if (updatedSubtask.id && existingSubtaskIds.includes(updatedSubtask.id)) {
+          await this.updateSubtask(updatedSubtask.id, updatedSubtask);
         } else {
-          await this.createSubtask(todoResponse.data.id, subtask);
+          await this.createSubtask(todoResponse.data.id, updatedSubtask);
         }
       }
     }
@@ -129,19 +139,19 @@ export class AxiosService {
     return this.request('PUT', `/notes/update/${id}`, updatedNote);
   }
 
-  async getSubtasksByToDoId(toDoId: number): Promise<AxiosResponse> {
+  async getSubtasksByToDoId(toDoId: string): Promise<AxiosResponse> {
     return this.request('GET', `/todos/${toDoId}/subtasks/get`, null);
   }
 
-  async createSubtask(toDoId: number, subtask: Subtask): Promise<AxiosResponse> {
+  async createSubtask(toDoId: string, subtask: Subtask): Promise<AxiosResponse> {
     return this.request('POST', `/todos/${toDoId}/subtasks/add`, subtask);
   }
 
-  async updateSubtask(subtaskId: number, updatedSubtask: Subtask): Promise<AxiosResponse> {
+  async updateSubtask(subtaskId: string, updatedSubtask: Subtask): Promise<AxiosResponse> {
     return this.request('PUT', `/subtasks/update/${subtaskId}`, updatedSubtask);
   }
 
-  async deleteSubtask(subtaskId: number): Promise<AxiosResponse> {
+  async deleteSubtask(subtaskId: string): Promise<AxiosResponse> {
     return this.request('DELETE', `/subtasks/delete/${subtaskId}`, null);
   }
 }
