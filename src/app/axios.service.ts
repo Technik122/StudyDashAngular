@@ -84,12 +84,15 @@ export class AxiosService {
   async updateToDo(id: string, updatedToDo: ToDo): Promise<AxiosResponse> {
     const todoResponse = await this.request('PUT', `/todos/update/${id}`, updatedToDo);
 
+
     if (updatedToDo.subtasks) {
+
       const existingSubtasksResponse = await this.getSubtasksByToDoId(id);
       const existingSubtasks = existingSubtasksResponse.data;
 
-      const updatedSubtaskIds = updatedToDo.subtasks.map((subtask: Subtask) => subtask.id);
+     const updatedSubtaskIds = updatedToDo.subtasks.map((subtask: Subtask) => subtask.id);
       const existingSubtaskIds = existingSubtasks.map((subtask: Subtask) => subtask.id);
+
 
       for (let existingSubtask of existingSubtasks) {
         if (!updatedSubtaskIds.includes(existingSubtask.id)) {
@@ -104,9 +107,11 @@ export class AxiosService {
           await this.createSubtask(todoResponse.data.id, updatedSubtask);
         }
       }
+
     }
     return todoResponse;
   }
+
   async getCoursesByUser(): Promise<AxiosResponse> {
     return this.request('GET', '/courses/get', null);
   }
@@ -115,11 +120,11 @@ export class AxiosService {
     return this.request('POST', '/courses/add', course);
   }
 
-  async deleteCourse(id: number): Promise<AxiosResponse> {
+  async deleteCourse(id: string): Promise<AxiosResponse> {
     return this.request('DELETE', `/courses/delete/${id}`, null);
   }
 
-  async updateCourse(id: number, updatedCourse: Course): Promise<AxiosResponse> {
+  async updateCourse(id: string, updatedCourse: Course): Promise<AxiosResponse> {
     return this.request('PUT', `/courses/update/${id}`, updatedCourse);
   }
 
@@ -131,11 +136,11 @@ export class AxiosService {
     return this.request('POST', '/notes/add', note);
   }
 
-  async deleteNote(id: number): Promise<AxiosResponse> {
+  async deleteNote(id: string): Promise<AxiosResponse> {
     return this.request('DELETE', `/notes/delete/${id}`, null);
   }
 
-  async updateNote(id: number, updatedNote: Note): Promise<AxiosResponse> {
+  async updateNote(id: string, updatedNote: Note): Promise<AxiosResponse> {
     return this.request('PUT', `/notes/update/${id}`, updatedNote);
   }
 
