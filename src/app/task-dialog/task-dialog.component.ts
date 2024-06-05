@@ -66,6 +66,17 @@ export class TaskDialogComponent {
       result.subtasks = this.subtasks.value;
 
       if (this.data.isEdit) {
+        const originalSubtasksResponse = await this.axiosService.getSubtasksByToDoId(this.data.id);
+        const originalSubtasks = originalSubtasksResponse.data;
+
+        const removedSubtasks = originalSubtasks.filter((originalSubtask: Subtask) =>
+          !result.subtasks.some((subtask: Subtask) => subtask.id === originalSubtask.id)
+        );
+
+        for (const removedSubtask of removedSubtasks) {
+          await this.axiosService.deleteSubtask(removedSubtask.id)
+        }
+
         await this.axiosService.updateToDo(this.data.id, result);
         for (const subtask of result.subtasks) {
           if (subtask.id) {
