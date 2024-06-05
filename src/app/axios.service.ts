@@ -4,13 +4,14 @@ import {ToDo} from "./to-do";
 import {Course} from "./course";
 import {Note} from "./note";
 import {Subtask} from "./subtask";
+import {NotificationsService} from "angular2-notifications";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AxiosService {
 
-  constructor() {
+  constructor(private notificationsService: NotificationsService) {
     axios.defaults.baseURL = "http://localhost:8080"
     axios.defaults.headers.post["Content-Type"] = "application/json"
   }
@@ -62,19 +63,24 @@ export class AxiosService {
     this.setAuthToken(null);
   }
 
-  request(method: string, url: string, data: any): Promise<any> {
-    let headers: Record<string, string> = {};
+  async request(method: string, url: string, data: any): Promise<any> {
+    try {
+      let headers: Record<string, string> = {};
 
-    if (this.getAuthToken() !== null) {
-      headers["Authorization"] = "Bearer " + this.getAuthToken();
+      if (this.getAuthToken() !== null) {
+        headers["Authorization"] = "Bearer " + this.getAuthToken();
+      }
+
+      return await axios({
+        method: method,
+        url: url,
+        data: data,
+        headers: headers
+      });
+    } catch (error) {
+      this.notificationsService.error('Fehler', 'Es gab einen Fehler bei der Verbindung zum Server');
+      throw error;
     }
-
-    return axios({
-      method: method,
-      url: url,
-      data: data,
-      headers: headers
-    });
   }
 
   async isTokenValid(): Promise<boolean> {

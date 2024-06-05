@@ -33,6 +33,7 @@ import { CourseDialogComponent} from "./course-dialog/course-dialog.component";
 import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-delete-dialog.component';
 import { SubtaskComponent } from './subtask/subtask.component';
 import {TokenInterceptor} from "./TokenInterceptor";
+import {SimpleNotificationsModule} from "angular2-notifications";
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import {TokenInterceptor} from "./TokenInterceptor";
     MatButtonModule,
     MatIconModule,
     MatNativeDateModule,
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [AxiosService, provideAnimationsAsync(), {
     provide: HTTP_INTERCEPTORS,
