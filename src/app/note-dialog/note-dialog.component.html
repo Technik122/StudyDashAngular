@@ -4,11 +4,15 @@
     <mat-form-field appearance="fill">
       <mat-label>Titel</mat-label>
       <input matInput formControlName="title">
+      <mat-error *ngIf="noteForm.get('title')?.hasError('required')">Titel ist erforderlich.</mat-error>
+      <mat-error *ngIf="noteForm.get('title')?.hasError('maxlength')">Inhalt ist zu lang.</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Inhalt</mat-label>
       <textarea matInput formControlName="content"></textarea>
+      <mat-error *ngIf="noteForm.get('content')?.hasError('required')">Inhalt ist erforderlich.</mat-error>
+      <mat-error *ngIf="noteForm.get('content')?.hasError('maxlength')">Inhalt ist zu lang.</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -16,6 +20,7 @@
       <input matInput [matDatepicker]="picker" formControlName="date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="noteForm.get('date')?.hasError('required')">Datum ist erforderlich.</mat-error>
     </mat-form-field>
   </form>
 </mat-dialog-content>

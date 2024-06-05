@@ -16,8 +16,8 @@ export class NoteDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.noteForm = this.fb.group({
-      title: [data.title || '', Validators.required],
-      content: [data.content || '', Validators.required],
+      title: [data.title || '', [Validators.required, Validators.maxLength(50)]],
+      content: [data.content || '', [Validators.required, Validators.maxLength(255)]],
       date: [data.date || '', Validators.required]
     });
   }
