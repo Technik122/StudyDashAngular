@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -32,6 +32,7 @@ import { NoteDialogComponent } from './note-dialog/note-dialog.component';
 import { CourseDialogComponent} from "./course-dialog/course-dialog.component";
 import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-delete-dialog.component';
 import { SubtaskComponent } from './subtask/subtask.component';
+import {TokenInterceptor} from "./TokenInterceptor";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,11 @@ import { SubtaskComponent } from './subtask/subtask.component';
     MatIconModule,
     MatNativeDateModule,
   ],
-  providers: [AxiosService, provideAnimationsAsync()],
+  providers: [AxiosService, provideAnimationsAsync(), {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

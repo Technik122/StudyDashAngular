@@ -146,7 +146,7 @@ export class AxiosService {
     return this.request('PUT', `/subtasks/update/${subtaskId}`, updatedSubtask);
   }
 
-  async deleteSubtask(subtaskId: string): Promise<AxiosResponse> {
+  /*async deleteSubtask(subtaskId: string): Promise<AxiosResponse> {
     return this.request('DELETE', `/subtasks/delete/${subtaskId}`, null);
-  }
+  }*/
 }
