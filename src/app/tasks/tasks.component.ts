@@ -15,7 +15,7 @@ export class TasksComponent implements OnInit {
   priorities = ['HOCH', 'MITTEL', 'NIEDRIG'];
   toDos: ToDo[] = [];
   completedToDos: ToDo[] = [];
-  subtasks: Subtask[] = [];
+  subtasks: Map<string, Subtask[]> = new Map();
 
   showCompleted: boolean = false;
 
@@ -46,7 +46,6 @@ export class TasksComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(async (result: ToDo) => {
       if (result) {
-        await this.axiosService.createToDo(result);
         await this.loadToDosAndSubtasks();
       }
     });
@@ -90,14 +89,14 @@ export class TasksComponent implements OnInit {
     this.toDos = response.data.filter((todo: ToDo) => !todo.completed);
     this.completedToDos = response.data.filter((todo: ToDo) => todo.completed);
 
-    for (let todo of this.toDos) {
-      const subtasksResponse = await this.axiosService.getSubtasksByToDoId(todo.id);
-      todo.subtasks = subtasksResponse.data;
+    for (const toDo of this.toDos) {
+      const subtasks = await this.getSubtasksByParentToDoId(toDo.id);
+      this.subtasks.set(toDo.id, subtasks);
     }
+  }
 
-    for (let todo of this.completedToDos) {
-      const subtasksResponse = await this.axiosService.getSubtasksByToDoId(todo.id);
-      todo.subtasks = subtasksResponse.data;
-    }
+  async getSubtasksByParentToDoId(parentToDoId: string): Promise<Subtask[]> {
+    const response = await this.axiosService.getSubtasksByToDoId(parentToDoId);
+    return response.data;
   }
 }

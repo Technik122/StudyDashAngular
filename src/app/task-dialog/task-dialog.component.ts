@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {Component, Inject} from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AxiosService} from "../axios.service";
 import {Subtask} from "../subtask";
@@ -16,7 +16,7 @@ export class TaskDialogComponent {
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<TaskDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private axiosService:AxiosService
+    private axiosService: AxiosService
   ) {
     this.taskForm = this.fb.group({
       description: ['', Validators.required],
@@ -28,8 +28,7 @@ export class TaskDialogComponent {
 
   async ngOnInit(): Promise<void> {
     if (this.data.isEdit) {
-      let deadLineDate = this.data.deadLine ?
-        new Date(this.data.deadLine) : null;
+      let deadLineDate = this.data.deadLine ? new Date(this.data.deadLine) : null;
 
       this.taskForm.patchValue({
         description: this.data.description,
@@ -48,6 +47,7 @@ export class TaskDialogComponent {
 
       subtasks.forEach((subtask: Subtask) => {
         subtasksFormArray.push(this.fb.group({
+          id: [subtask.id],
           description: [subtask.description, Validators.required],
           completed: [subtask.completed]
         }));
@@ -60,10 +60,27 @@ export class TaskDialogComponent {
     this.dialogRef.close();
   }
 
-  onSave(): void {
+  async onSave(): Promise<void> {
     if (this.taskForm.valid) {
       const result = this.taskForm.value;
       result.subtasks = this.subtasks.value;
+
+      if (this.data.isEdit) {
+        await this.axiosService.updateToDo(this.data.id, result);
+        for (const subtask of result.subtasks) {
+          if (subtask.id) {
+            await this.axiosService.updateSubtask(subtask.id, subtask);
+          } else {
+            await this.axiosService.createSubtask(this.data.id, subtask);
+          }
+        }
+      } else {
+        const response = await this.axiosService.createToDo(result);
+        const toDoId = response.data.id;
+        for (const subtask of result.subtasks) {
+          await this.axiosService.createSubtask(toDoId, subtask);
+        }
+      }
       this.dialogRef.close(result);
     }
   }

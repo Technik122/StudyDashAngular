@@ -37,6 +37,23 @@ export class AxiosService {
     }
   }
 
+  async refreshToken(): Promise<string> {
+    try {
+      const response = await this.request('POST', '/refresh-token', null);
+
+      if (response.status === 200) {
+        this.setAuthToken(response.data.token);
+        return response.data.token;
+      } else {
+        console.error('Token kann nicht erneuert werden');
+        return '';
+      }
+    } catch (error) {
+      console.error(error);
+      return '';
+    }
+  }
+
   isLoggedIn(): boolean {
     return this.getAuthToken() !== null;
   }
@@ -82,34 +99,7 @@ export class AxiosService {
   }
 
   async updateToDo(id: string, updatedToDo: ToDo): Promise<AxiosResponse> {
-    const todoResponse = await this.request('PUT', `/todos/update/${id}`, updatedToDo);
-
-
-    if (updatedToDo.subtasks) {
-
-      const existingSubtasksResponse = await this.getSubtasksByToDoId(id);
-      const existingSubtasks = existingSubtasksResponse.data;
-
-     const updatedSubtaskIds = updatedToDo.subtasks.map((subtask: Subtask) => subtask.id);
-      const existingSubtaskIds = existingSubtasks.map((subtask: Subtask) => subtask.id);
-
-
-      for (let existingSubtask of existingSubtasks) {
-        if (!updatedSubtaskIds.includes(existingSubtask.id)) {
-          await this.deleteSubtask(existingSubtask.id);
-        }
-      }
-
-      for (let updatedSubtask of updatedToDo.subtasks) {
-        if (updatedSubtask.id && existingSubtaskIds.includes(updatedSubtask.id)) {
-          await this.updateSubtask(updatedSubtask.id, updatedSubtask);
-        } else {
-          await this.createSubtask(todoResponse.data.id, updatedSubtask);
-        }
-      }
-
-    }
-    return todoResponse;
+    return this.request('PUT', `/todos/update/${id}`, updatedToDo);
   }
 
   async getCoursesByUser(): Promise<AxiosResponse> {
