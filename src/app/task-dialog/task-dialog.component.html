@@ -4,6 +4,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Beschreibung</mat-label>
       <textarea matInput formControlName="description"></textarea>
+      <mat-error *ngIf="taskForm.get('description')?.hasError('required')">Beschreibung ist erforderlich.</mat-error>
+      <mat-error *ngIf="taskForm.get('description')?.hasError('maxlength')">Beschreibung ist zu lang.</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -11,22 +13,27 @@
       <input matInput [matDatepicker]="picker" formControlName="deadLine">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="taskForm.get('deadLine')?.hasError('required')">Datum ist erforderlich.</mat-error>
     </mat-form-field>
 
-    <h3>Subtasks</h3>
+    <div style="display: flex; align-items: center;">
+      <h3>Subtasks</h3>
+      <button mat-icon-button (click)="addSubtask()" style="margin-left: 20px;">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
     <div formArrayName="subtasks">
       <div *ngFor="let subtask of subtasks.controls; let i = index" [formGroupName]="i">
         <mat-form-field appearance="fill">
           <mat-label>Subtask</mat-label>
           <input matInput formControlName="description">
+          <mat-error *ngIf="taskForm.get('subtask')?.hasError('required')">Beschreibung ist erforderlich.</mat-error>
+          <mat-error *ngIf="taskForm.get('subtask')?.hasError('maxlength')">Beschreibung ist zu lang.</mat-error>
         </mat-form-field>
         <button mat-icon-button (click)="removeSubtask(i)">
           <mat-icon>remove</mat-icon>
         </button>
       </div>
-      <button mat-fab color="primary" (click)="addSubtask()">
-        <mat-icon>add</mat-icon>
-      </button>
     </div>
 
     <mat-form-field appearance="fill">
@@ -36,6 +43,7 @@
         <mat-option value="MITTEL">Mittel</mat-option>
         <mat-option value="NIEDRIG">Niedrig</mat-option>
       </mat-select>
+      <mat-error *ngIf="taskForm.get('priority')?.hasError('required')">Priorität ist erforderlich.</mat-error>
     </mat-form-field>
   </form>
 </mat-dialog-content>

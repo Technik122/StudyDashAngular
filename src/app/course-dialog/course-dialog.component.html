@@ -4,6 +4,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Name</mat-label>
       <input matInput formControlName="name">
+      <mat-error *ngIf="courseForm.get('name')?.hasError('required')">Name ist erforderlich.</mat-error>
+      <mat-error *ngIf="courseForm.get('name')?.hasError('maxlength')">Name ist zu lang.</mat-error>
     </mat-form-field>
   </form>
 </mat-dialog-content>

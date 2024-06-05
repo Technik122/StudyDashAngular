@@ -19,7 +19,7 @@ export class TaskDialogComponent {
     private axiosService: AxiosService
   ) {
     this.taskForm = this.fb.group({
-      description: ['', Validators.required],
+      description: ['', [Validators.required, Validators.maxLength(50)]],
       deadLine: ['', Validators.required],
       priority: ['', Validators.required],
       subtasks: this.fb.array([this.initSubtask()])
@@ -48,7 +48,7 @@ export class TaskDialogComponent {
       subtasks.forEach((subtask: Subtask) => {
         subtasksFormArray.push(this.fb.group({
           id: [subtask.id],
-          description: [subtask.description, Validators.required],
+          description: [subtask.description, [Validators.required, Validators.maxLength(50)]],
           completed: [subtask.completed]
         }));
       });
@@ -104,7 +104,7 @@ export class TaskDialogComponent {
 
   initSubtask(): FormGroup {
     return this.fb.group({
-      description: ['', Validators.required],
+      description: ['', [Validators.required, Validators.maxLength(50)]],
       completed: [false]
     })
   }

@@ -16,7 +16,7 @@ export class CourseDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.courseForm = this.fb.group({
-      name: [data.name || '', Validators.required]
+      name: [data.name || '', [Validators.required, Validators.maxLength(50)]]
     });
   }
 
