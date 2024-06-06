@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import axios, {AxiosResponse} from 'axios';
+import axios, {AxiosError, AxiosResponse} from 'axios';
 import {ToDo} from "./to-do";
 import {Course} from "./course";
 import {Note} from "./note";
@@ -16,9 +16,17 @@ export class AxiosService {
     axios.defaults.headers.post["Content-Type"] = "application/json"
   }
 
-  login(credentials: {username: string, password: string}) {
+  async login(credentials: {username: string, password: string}) {
     localStorage.removeItem("auth_token");
-    return this.request('POST', '/login', credentials);
+    try {
+      const response = await this.request('POST', '/login', credentials);
+      if (response.status === 200) {
+        this.notificationsService.success('Willkommen 🥳', `${credentials.username}`);
+      }
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
 
   register(credentials: {username: string, password: string}) {
@@ -61,6 +69,7 @@ export class AxiosService {
 
   logout(): void {
     this.setAuthToken(null);
+    this.notificationsService.success('Auf Wiedersehen 🥳', 'Sie haben sich erfolgreich ausgeloggt.');
   }
 
   async request(method: string, url: string, data: any): Promise<any> {
@@ -78,8 +87,22 @@ export class AxiosService {
         headers: headers
       });
     } catch (error) {
-      this.notificationsService.error('Fehler', 'Es gab einen Fehler bei der Verbindung zum Server');
-      throw error;
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        const errorData = axiosError.response.data as ErrorData;
+        if (axiosError.response.status === 401) {
+          this.notificationsService.error('Fehler', errorData.message);
+        } else if (axiosError.response.status === 404) {
+          this.notificationsService.error('Fehler', errorData.message);
+        } else if (axiosError.response.status === 400) {
+          this.notificationsService.error('Fehler', errorData.message);
+        }
+      } else if (axiosError.request) {
+        this.notificationsService.error('Fehler', 'Es gab einen Fehler bei der Verbindung zum Server');
+      } else {
+        this.notificationsService.error('Fehler', 'Es gab einen Fehler bei der Anfrage');
+      }
+      throw axiosError;
     }
   }
 
@@ -155,4 +178,8 @@ export class AxiosService {
   async deleteSubtask(subtaskId: string): Promise<AxiosResponse> {
     return this.request('DELETE', `/subtasks/delete/${subtaskId}`, null);
   }
+}
+
+interface ErrorData {
+  message: string;
 }

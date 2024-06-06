@@ -15,12 +15,12 @@ export class AppComponent {
     if (this.axiosService.isLoggedIn()) {
       const isValid = await this.axiosService.isTokenValid();
       if (isValid) {
-        this.router.navigate(['/dashboard']);
+        await this.router.navigate(['/dashboard']);
       } else {
-        this.router.navigate(['/login']);
+        await this.router.navigate(['/login']);
       }
     } else {
-      this.router.navigate(['/login']);
+      await this.router.navigate(['/login']);
     }
   }
 }

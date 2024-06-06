@@ -11,13 +11,13 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(): Promise<boolean> {
     if (!this.axiosService.isLoggedIn()) {
-      this.router.navigate(['/login']);
+      await this.router.navigate(['/login']);
       return false;
     }
 
     const isValid = await this.axiosService.isTokenValid();
     if (!isValid) {
-      this.router.navigate(['/login']);
+      await this.router.navigate(['/login']);
     }
     return isValid;
   }
