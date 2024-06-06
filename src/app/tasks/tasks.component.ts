@@ -93,6 +93,11 @@ export class TasksComponent implements OnInit {
       const subtasks = await this.getSubtasksByParentToDoId(toDo.id);
       this.subtasks.set(toDo.id, subtasks);
     }
+
+    for (const toDo of this.completedToDos) {
+      const subtasks = await this.getSubtasksByParentToDoId(toDo.id);
+      this.subtasks.set(toDo.id, subtasks);
+    }
   }
 
   async getSubtasksByParentToDoId(parentToDoId: string): Promise<Subtask[]> {

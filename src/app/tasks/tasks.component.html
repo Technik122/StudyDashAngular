@@ -18,9 +18,9 @@
 
         <app-subtask *ngFor="let subtask of subtasks.get(todo.id)" [subtask]="subtask"></app-subtask>
 
-          <mat-label>Priorität</mat-label>
+        <mat-label>Priorität</mat-label>
         <br>
-        <strong>{{todo.priority}}</strong>
+        <strong>{{ todo.priority }}</strong>
 
         <div class="task-actions">
           <button mat-icon-button (click)="markAsCompleted(todo)">
@@ -41,36 +41,31 @@
     </button>
     <div class="trenner" *ngIf="showCompleted"></div>
 
-    <ng-container  *ngIf="showCompleted">
-    <mat-expansion-panel *ngFor="let todo of completedToDos" class="completed-task">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ todo.description }}
-        </mat-panel-title>
-        <mat-panel-description>
-          Enddatum: {{ todo.deadLine | date:'dd.MM.yyyy' }}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div>
-        <!-- hier Subtasks -->
-        <mat-form-field appearance="fill">
+    <ng-container *ngIf="showCompleted">
+      <mat-expansion-panel *ngFor="let todo of completedToDos" class="completed-task">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ todo.description }}
+          </mat-panel-title>
+          <mat-panel-description>
+            Enddatum: {{ todo.deadLine | date:'dd.MM.yyyy' }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+          <app-subtask *ngFor="let subtask of subtasks.get(todo.id)" [subtask]="subtask"></app-subtask>
           <mat-label>Priorität</mat-label>
-          <mat-select [(value)]="todo.priority">
-            <mat-option *ngFor="let priority of priorities" [value]="priority">
-              {{ priority }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <div class="task-actions">
-          <button mat-icon-button (click)="markAsUncompleted(todo)">
-            <mat-icon>undo</mat-icon>
-          </button>
-          <button mat-icon-button (click)="confirmDeleteTask(todo.id)">
-            <mat-icon>delete</mat-icon>
-          </button>
+          <br>
+          <strong>{{ todo.priority }}</strong>
+          <div class="task-actions">
+            <button mat-icon-button (click)="markAsUncompleted(todo)">
+              <mat-icon>undo</mat-icon>
+            </button>
+            <button mat-icon-button (click)="confirmDeleteTask(todo.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </div>
-      </div>
-    </mat-expansion-panel>
+      </mat-expansion-panel>
     </ng-container>
   </mat-accordion>
 </div>
