@@ -3,6 +3,9 @@
     <button mat-icon-button (click)="openCourseDialog()">
       <mat-icon>add</mat-icon>
     </button>
+    <button mat-icon-button (click)="openCompletedCoursesDialog()">
+      <mat-icon>history</mat-icon>
+    </button>
   </h2>
   <div class="course-list">
     <mat-card *ngFor="let course of courses" class="course-card">
@@ -17,6 +20,9 @@
         <mat-card-subtitle>Note: {{ course.grade }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-actions>
+        <button mat-icon-button (click)="markAsCompleted(course)">
+          <mat-icon>check</mat-icon>
+        </button>
         <button mat-icon-button (click)="editCourse(course)">
           <mat-icon>edit</mat-icon>
         </button>

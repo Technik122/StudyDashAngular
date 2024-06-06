@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
 import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
 import {Subtask} from "../subtask";
+import {CompletedToDosDialogComponent} from "../completed-to-dos-dialog/completed-to-dos-dialog.component";
 
 @Component({
   selector: 'app-tasks',
@@ -17,8 +18,6 @@ export class TasksComponent implements OnInit {
   completedToDos: ToDo[] = [];
   subtasks: Map<string, Subtask[]> = new Map();
 
-  showCompleted: boolean = false;
-
   constructor(public dialog: MatDialog, private axiosService: AxiosService) {}
 
   async ngOnInit() {
@@ -30,13 +29,6 @@ export class TasksComponent implements OnInit {
     await this.axiosService.updateToDo(toDo.id, toDo);
     await this.loadToDosAndSubtasks();
   }
-
-  async markAsUncompleted(toDo: ToDo) {
-    toDo.completed = false;
-    await this.axiosService.updateToDo(toDo.id, toDo);
-    await this.loadToDosAndSubtasks();
-  }
-
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TaskDialogComponent, {
@@ -80,10 +72,6 @@ export class TasksComponent implements OnInit {
     });
   }
 
-  toggleCompleted(): void {
-    this.showCompleted = !this.showCompleted;
-  }
-
   async loadToDosAndSubtasks(): Promise<void> {
     const response = await this.axiosService.getToDosByUser();
     this.toDos = response.data.filter((todo: ToDo) => !todo.completed);
@@ -103,5 +91,15 @@ export class TasksComponent implements OnInit {
   async getSubtasksByParentToDoId(parentToDoId: string): Promise<Subtask[]> {
     const response = await this.axiosService.getSubtasksByToDoId(parentToDoId);
     return response.data;
+  }
+
+  async openCompletedToDosDialog(): Promise<void> {
+    const dialogRef = this.dialog.open(CompletedToDosDialogComponent, {
+      width: '600px'
+    });
+
+    dialogRef.componentInstance.toDoUncompleted.subscribe(async () => {
+      await this.loadToDosAndSubtasks();
+    });
   }
 }

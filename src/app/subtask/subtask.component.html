@@ -1,5 +1,5 @@
 <div>
-  <mat-checkbox [checked]="subtask.completed" (click)="onCheckboxClick(subtask)">
+  <mat-checkbox [checked]="subtask.completed" (click)="onCheckboxClick(subtask)" [disabled]="isParentToDoCompleted(subtask)">
     <div [ngClass]="{'completed': subtask.completed}">{{ subtask.description }}</div>
   </mat-checkbox>
 </div>

@@ -1,0 +1,32 @@
+.underlined-heading {
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.underlined-heading::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 70%;
+  height: 2px;
+  background-color: black;
+  top: 40px;
+  margin-bottom: 10px;
+}
+
+.close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.completed-courses {
+  padding: 20px;
+}
+
+.completed-courses .mat-expansion-panel-body {
+  height: 100px;
+  overflow: auto;
+}

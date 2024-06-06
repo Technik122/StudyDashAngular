@@ -1,0 +1,42 @@
+<div class="completed-todos">
+  <h4 class="underlined-heading">Abgeschlossene ToDos
+    <button mat-icon-button class="close-button" (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </h4>
+  <mat-accordion *ngFor="let month of completedToDos | keyvalue">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ month.key }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-accordion *ngFor="let todo of month.value">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ todo.description }}
+            </mat-panel-title>
+            <mat-panel-description>
+              Enddatum: {{ todo.deadLine | date:'dd.MM.yyyy' }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div>
+            <app-subtask *ngFor="let subtask of subtasks.get(todo.id)" [subtask]="subtask" [toDos]="outputToDos"></app-subtask>
+            <mat-label>Priorität</mat-label>
+            <br>
+            <strong>{{ todo.priority }}</strong>
+          </div>
+          <mat-card-actions>
+            <button mat-icon-button (click)="markAsUncompleted(todo)">
+              <mat-icon>undo</mat-icon>
+            </button>
+            <button mat-icon-button (click)="confirmDeleteCourse(todo)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

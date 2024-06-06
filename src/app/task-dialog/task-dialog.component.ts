@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AxiosService} from "../axios.service";
@@ -9,7 +9,7 @@ import {Subtask} from "../subtask";
   templateUrl: './task-dialog.component.html',
   styleUrls: ['./task-dialog.component.css']
 })
-export class TaskDialogComponent {
+export class TaskDialogComponent implements OnInit {
   taskForm: FormGroup;
 
   constructor(
@@ -20,7 +20,7 @@ export class TaskDialogComponent {
   ) {
     this.taskForm = this.fb.group({
       description: ['', [Validators.required, Validators.maxLength(50)]],
-      deadLine: ['', Validators.required],
+      deadLine: [''],
       priority: ['', Validators.required],
       subtasks: this.fb.array([this.initSubtask()])
     });

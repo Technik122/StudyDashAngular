@@ -34,6 +34,8 @@ import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-de
 import { SubtaskComponent } from './subtask/subtask.component';
 import {TokenInterceptor} from "./TokenInterceptor";
 import {SimpleNotificationsModule} from "angular2-notifications";
+import { CompletedCoursesDialogComponent } from './completed-courses-dialog/completed-courses-dialog.component';
+import { CompletedToDosDialogComponent } from './completed-to-dos-dialog/completed-to-dos-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import {SimpleNotificationsModule} from "angular2-notifications";
     NoteDialogComponent,
     CourseDialogComponent,
     ConfirmDeleteDialogComponent,
-    SubtaskComponent
+    SubtaskComponent,
+    CompletedCoursesDialogComponent,
+    CompletedToDosDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,7 @@ import {SimpleNotificationsModule} from "angular2-notifications";
     MatButtonModule,
     MatIconModule,
     MatNativeDateModule,
-    SimpleNotificationsModule.forRoot()
+    SimpleNotificationsModule.forRoot(),
   ],
   providers: [AxiosService, provideAnimationsAsync(), {
     provide: HTTP_INTERCEPTORS,
