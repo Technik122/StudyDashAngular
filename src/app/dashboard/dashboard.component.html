@@ -1,25 +1,28 @@
 <div class="dashboard">
   <div class="dashboard-header">
+    <h1>Dashboard</h1>
     <button mat-button class="small-button" (click)="logout()">Ausloggen</button>
   </div>
 
   <div class="dashboard-content">
-    <app-tasks></app-tasks>
-    <app-notes></app-notes>
+    <app-tasks class="dashboard-tasks"></app-tasks>
+    <app-notes class="dashboard-notes"></app-notes>
+  </div>
+
+  <div class="dashboard-courses">
     <app-courses></app-courses>
   </div>
 
   <div class="dashboard-rightarea">
-    <div class="calendar">
-      <h3>Calendar / 2024 / May</h3>
-      <!-- Calendar widget will be here -->
-    </div>
     <div class="weather">
-      <h3>Wettervorhersage</h3>
-      <input type="text" [(ngModel)]="location" placeholder="Geben Sie einen Ort ein" />
-      <button (click)="updateWeatherWidget()">Aktualisieren</button>
-      <!-- Wetter Widget hier einfügen -->
-      <a class="weatherwidget-io" [attr.href]="weatherWidgetUrl" data-label_1="WETTER" data-label_2="WOCHENÜBERSICHT" data-days="5">WETTER</a>
+      <div class="search-container">
+        <input type="text" [(ngModel)]="location" placeholder="Ort eingeben" class="search-input" />
+        <button (click)="updateWeatherWidget()" class="search-button">
+          <img src="/assets/search%20icon.png" alt="Suchen" class="search-icon" />
+        </button>
+      </div>
+      <div id="weather"></div>
     </div>
   </div>
 </div>
+
