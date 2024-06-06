@@ -21,7 +21,7 @@ export class AxiosService {
     try {
       const response = await this.request('POST', '/login', credentials);
       if (response.status === 200) {
-        this.notificationsService.success('Willkommen 🥳', `${credentials.username}`);
+        this.notificationsService.success('Willkommen 🥳', `${credentials.username}`, {timeOut: 10000});
       }
       return response;
     } catch (error) {
@@ -69,7 +69,7 @@ export class AxiosService {
 
   logout(): void {
     this.setAuthToken(null);
-    this.notificationsService.success('Auf Wiedersehen 🥳', 'Sie haben sich erfolgreich ausgeloggt.');
+    this.notificationsService.success('Auf Wiedersehen 🥳', 'Sie haben sich erfolgreich ausgeloggt.', {timeOut: 10000});
   }
 
   async request(method: string, url: string, data: any): Promise<any> {
@@ -91,16 +91,16 @@ export class AxiosService {
       if (axiosError.response) {
         const errorData = axiosError.response.data as ErrorData;
         if (axiosError.response.status === 401) {
-          this.notificationsService.error('Fehler', errorData.message);
+          this.notificationsService.error('Fehler', errorData.message, {timeOut: 10000});
         } else if (axiosError.response.status === 404) {
-          this.notificationsService.error('Fehler', errorData.message);
+          this.notificationsService.error('Fehler', errorData.message, {timeOut: 10000});
         } else if (axiosError.response.status === 400) {
-          this.notificationsService.error('Fehler', errorData.message);
+          this.notificationsService.error('Fehler', errorData.message, {timeOut: 10000});
         }
       } else if (axiosError.request) {
-        this.notificationsService.error('Fehler', 'Es gab einen Fehler bei der Verbindung zum Server');
+        this.notificationsService.error('Fehler', 'Es gab einen Fehler bei der Verbindung zum Server', {timeOut: 10000});
       } else {
-        this.notificationsService.error('Fehler', 'Es gab einen Fehler bei der Anfrage');
+        this.notificationsService.error('Fehler', 'Es gab einen Fehler bei der Anfrage', {timeOut: 10000});
       }
       throw axiosError;
     }
