@@ -7,6 +7,32 @@
       <mat-error *ngIf="courseForm.get('name')?.hasError('required')">Name ist erforderlich.</mat-error>
       <mat-error *ngIf="courseForm.get('name')?.hasError('maxlength')">Name ist zu lang.</mat-error>
     </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Semester</mat-label>
+      <input matInput formControlName="semester">
+      <mat-error *ngIf="courseForm.get('semester')?.hasError('required')">Semester ist erforderlich.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Prüfungstyp</mat-label>
+      <input matInput formControlName="exam">
+      <mat-error *ngIf="courseForm.get('exam')?.hasError('required')">Prüfung ist erforderlich.</mat-error>
+      <mat-error *ngIf="courseForm.get('exam')?.hasError('maxlength')">Prüfungstyp ist zu lang.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Prüfungsdatum</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="examDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="courseForm.get('examDate')?.hasError('required')">Prüfungsdatum ist erforderlich.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Note</mat-label>
+      <input matInput formControlName="grade">
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

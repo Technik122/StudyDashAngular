@@ -29,9 +29,17 @@ export class AxiosService {
     }
   }
 
-  register(credentials: {username: string, password: string}) {
+  async register(credentials: {username: string, password: string}) {
     localStorage.removeItem("auth_token");
-    return this.request('POST', '/register', credentials);
+    try {
+      const response = await this.request('POST', '/register', credentials);
+      if (response.status === 201) {
+        this.notificationsService.success('Erfolgreich registriert 🥳', `Bitte loggen Sie sich ein`, {timeOut: 10000});
+      }
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
 
   getAuthToken(): string | null {

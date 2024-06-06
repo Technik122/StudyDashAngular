@@ -16,8 +16,26 @@ export class CourseDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.courseForm = this.fb.group({
-      name: [data.name || '', [Validators.required, Validators.maxLength(50)]]
+      name: [data.name || '', [Validators.required, Validators.maxLength(50)]],
+      semester: [data.semeter || '', [Validators.required, Validators.min(1), Validators.max(10)]],
+      exam: [data.exam || '', [Validators.required, Validators.maxLength(50)]],
+      examDate: [data.examDate || '', Validators.required],
+      grade: [data.grade || '']
     });
+  }
+
+  async ngOnInit(): Promise<void> {
+    if (this.data.isEdit) {
+      let examDate = this.data.examDate ? new Date(this.data.examDate) : null;
+
+      this.courseForm.patchValue({
+        name: this.data.name,
+        semester: this.data.semester,
+        exam: this.data.exam,
+        examDate: examDate,
+        grade: this.data.grade
+      });
+    }
   }
 
   onCancel(): void {
