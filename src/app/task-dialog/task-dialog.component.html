@@ -45,6 +45,16 @@
       </mat-select>
       <mat-error *ngIf="taskForm.get('priority')?.hasError('required')">Priorität ist erforderlich.</mat-error>
     </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Kurs</mat-label>
+      <mat-select formControlName="course">
+        <mat-option *ngFor="let course of courses" [value]="course.id">
+          {{ course.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

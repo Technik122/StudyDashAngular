@@ -3,6 +3,7 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AxiosService} from "../axios.service";
 import {Subtask} from "../subtask";
+import {Course} from "../course";
 
 @Component({
   selector: 'app-task-dialog',
@@ -11,6 +12,7 @@ import {Subtask} from "../subtask";
 })
 export class TaskDialogComponent implements OnInit {
   taskForm: FormGroup;
+  courses: Course[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -22,7 +24,8 @@ export class TaskDialogComponent implements OnInit {
       description: ['', [Validators.required, Validators.maxLength(50)]],
       deadLine: [''],
       priority: ['', Validators.required],
-      subtasks: this.fb.array([this.initSubtask()])
+      subtasks: this.fb.array([this.initSubtask()]),
+      course: ['']
     });
   }
 
@@ -33,7 +36,8 @@ export class TaskDialogComponent implements OnInit {
       this.taskForm.patchValue({
         description: this.data.description,
         deadLine: deadLineDate,
-        priority: this.data.priority
+        priority: this.data.priority,
+        course: this.data.course
       });
 
       const subtasksResponse = await this.axiosService.getSubtasksByToDoId(this.data.id);
@@ -53,6 +57,9 @@ export class TaskDialogComponent implements OnInit {
         }));
       });
     }
+
+    const response = await this.axiosService.getCoursesByUser();
+    this.courses = response.data;
   }
 
 

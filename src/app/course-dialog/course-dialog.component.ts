@@ -19,7 +19,7 @@ export class CourseDialogComponent {
       name: [data.name || '', [Validators.required, Validators.maxLength(50)]],
       semester: [data.semeter || '', [Validators.required, Validators.min(1), Validators.max(10)]],
       exam: [data.exam || '', [Validators.required, Validators.maxLength(50)]],
-      examDate: [data.examDate || '', Validators.required],
+      examDate: [data.examDate || ''],
       grade: [data.grade || '']
     });
   }
