@@ -20,7 +20,8 @@ export class CourseDialogComponent {
       semester: [data.semeter || '', [Validators.required, Validators.min(1), Validators.max(10)]],
       exam: [data.exam || '', [Validators.required, Validators.maxLength(50)]],
       examDate: [data.examDate || ''],
-      grade: [data.grade || '']
+      grade: [data.grade || ''],
+      color: [data.color || '']
     });
   }
 
@@ -33,7 +34,8 @@ export class CourseDialogComponent {
         semester: this.data.semester,
         exam: this.data.exam,
         examDate: examDate,
-        grade: this.data.grade
+        grade: this.data.grade,
+        color: this.data.color
       });
     }
   }

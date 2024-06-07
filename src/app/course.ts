@@ -7,4 +7,5 @@ export interface Course {
   grade?: number;
   completed: boolean;
   course: string;
+  color?: string;
 }

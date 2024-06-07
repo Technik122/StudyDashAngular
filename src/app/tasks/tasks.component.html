@@ -8,7 +8,7 @@
     </button>
   </h2>
   <mat-accordion>
-    <mat-expansion-panel *ngFor="let todo of toDos">
+    <mat-expansion-panel *ngFor="let todo of toDos" [ngStyle]="{'background-color': courseColors.get(todo.id)}">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ todo.description }}
@@ -24,6 +24,11 @@
         <mat-label>Priorität</mat-label>
         <br>
         <strong>{{ todo.priority }}</strong>
+        <br>
+        <br>
+        <mat-label>Kurs</mat-label>
+        <br>
+        <strong>{{getCourseName(todo.course ? todo.course : '')}}</strong>
 
         <div class="task-actions">
           <button mat-icon-button (click)="markAsCompleted(todo)">

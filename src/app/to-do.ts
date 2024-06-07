@@ -4,5 +4,5 @@ export interface ToDo {
   completed: boolean;
   deadLine: string;
   priority: string;
-  courseId?: string;
+  course?: string;
 }

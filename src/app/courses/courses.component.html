@@ -8,7 +8,7 @@
     </button>
   </h2>
   <div class="course-list">
-    <mat-card *ngFor="let course of courses" class="course-card">
+    <mat-card *ngFor="let course of courses" class="course-card" [style.background-color]="course.color">
       <mat-card-header>
         <mat-card-title>{{ course.name }}</mat-card-title>
         <mat-card-subtitle>Semester: {{ course.semester }}</mat-card-subtitle>
