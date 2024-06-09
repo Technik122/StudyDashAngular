@@ -36,10 +36,7 @@ import {TokenInterceptor} from "./TokenInterceptor";
 import {SimpleNotificationsModule} from "angular2-notifications";
 import {CompletedCoursesDialogComponent} from './completed-courses-dialog/completed-courses-dialog.component';
 import {CompletedToDosDialogComponent} from './completed-to-dos-dialog/completed-to-dos-dialog.component';
-import {CalendarComponent} from './calendar/calendar.component';
-import {CalendarModule, DateAdapter} from "angular-calendar";
-import {adapterFactory} from "angular-calendar/date-adapters/moment";
-import { GradeAverageComponent } from './grade-average/grade-average.component';
+import {GradeAverageComponent} from './grade-average/grade-average.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +54,6 @@ import { GradeAverageComponent } from './grade-average/grade-average.component';
     SubtaskComponent,
     CompletedCoursesDialogComponent,
     CompletedToDosDialogComponent,
-    CalendarComponent,
     GradeAverageComponent
   ],
   imports: [
@@ -78,8 +74,7 @@ import { GradeAverageComponent } from './grade-average/grade-average.component';
     MatButtonModule,
     MatIconModule,
     MatNativeDateModule,
-    SimpleNotificationsModule.forRoot(),
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [AxiosService, provideAnimationsAsync(), {
     provide: HTTP_INTERCEPTORS,
