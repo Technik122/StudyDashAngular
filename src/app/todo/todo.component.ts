@@ -83,6 +83,7 @@ export class TodoComponent implements OnInit {
   async loadToDosAndSubtasks(): Promise<void> {
     const response = await this.axiosService.getToDosByUser();
     this.toDos = response.data.filter((todo: Todo) => !todo.completed);
+    this.toDos.sort((a, b) => new Date(a.deadLine).getTime() - new Date(b.deadLine).getTime());
     this.completedToDos = response.data.filter((todo: Todo) => todo.completed);
     await this.loadCourses();
 
