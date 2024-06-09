@@ -13,12 +13,14 @@ import {CompletedCoursesDialogComponent} from "../completed-courses-dialog/compl
 })
 export class CourseComponent implements OnInit {
   courses: Course[] = [];
+  courseToDosCount: Map<string, number> = new Map();
 
   constructor(public dialog: MatDialog, private axiosService: AxiosService) {
   }
 
   async ngOnInit() {
     await this.refreshCourses();
+    await this.loadToDosCountForCourses();
   }
 
   async refreshCourses(): Promise<void> {
@@ -83,5 +85,12 @@ export class CourseComponent implements OnInit {
     course.completed = true;
     await this.axiosService.updateCourse(course.id, course);
     await this.refreshCourses();
+  }
+
+  async loadToDosCountForCourses(): Promise<void> {
+    for (const course of this.courses) {
+      const response = await this.axiosService.getToDosByCourse(course.id);
+      this.courseToDosCount.set(course.id, response.data.length);
+    }
   }
 }
