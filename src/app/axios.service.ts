@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios, {AxiosError, AxiosResponse} from 'axios';
-import {ToDo} from "./to-do";
+import {Todo} from "./todo";
 import {Course} from "./course";
 import {Note} from "./note";
 import {Subtask} from "./subtask";
@@ -127,7 +127,7 @@ export class AxiosService {
     return this.request('GET', '/todos/user', null);
   }
 
-  async createToDo(todo: ToDo): Promise<AxiosResponse> {
+  async createToDo(todo: Todo): Promise<AxiosResponse> {
     return this.request('POST', '/todos/add', todo);
   }
 
@@ -135,7 +135,7 @@ export class AxiosService {
     return this.request('DELETE', `/todos/delete/${id}`, null);
   }
 
-  async updateToDo(id: string, updatedToDo: ToDo): Promise<AxiosResponse> {
+  async updateToDo(id: string, updatedToDo: Todo): Promise<AxiosResponse> {
     return this.request('PUT', `/todos/update/${id}`, updatedToDo);
   }
 

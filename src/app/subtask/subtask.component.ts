@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Subtask} from "../subtask";
 import {AxiosService} from "../axios.service";
-import {ToDo} from "../to-do";
+import {Todo} from "../todo";
 
 @Component({
   selector: 'app-subtask',
@@ -10,7 +10,7 @@ import {ToDo} from "../to-do";
 })
 export class SubtaskComponent {
   @Input() subtask!: Subtask;
-  @Input() toDos: ToDo[] = [];
+  @Input() toDos: Todo[] = [];
 
   constructor(private axiosService: AxiosService) {}
 

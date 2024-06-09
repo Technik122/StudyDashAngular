@@ -7,12 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { TasksComponent } from './tasks/tasks.component';
+import { TodoComponent } from './todo/todo.component';
 import { NotesComponent } from './notes/notes.component';
-import { CoursesComponent } from './courses/courses.component';
+import { CourseComponent } from './course/course.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
-import { TaskDialogComponent } from './task-dialog/task-dialog.component';
+import { TodoDialogComponent } from './todo-dialog/todo-dialog.component';
 
 import { AxiosService } from './axios.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -36,23 +36,25 @@ import {TokenInterceptor} from "./TokenInterceptor";
 import {SimpleNotificationsModule} from "angular2-notifications";
 import { CompletedCoursesDialogComponent } from './completed-courses-dialog/completed-courses-dialog.component';
 import { CompletedToDosDialogComponent } from './completed-to-dos-dialog/completed-to-dos-dialog.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TasksComponent,
+    TodoComponent,
     NotesComponent,
-    CoursesComponent,
+    CourseComponent,
     DashboardComponent,
     RegisterComponent,
-    TaskDialogComponent,
+    TodoDialogComponent,
     NoteDialogComponent,
     CourseDialogComponent,
     ConfirmDeleteDialogComponent,
     SubtaskComponent,
     CompletedCoursesDialogComponent,
-    CompletedToDosDialogComponent
+    CompletedToDosDialogComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,

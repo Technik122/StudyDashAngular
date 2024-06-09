@@ -8,10 +8,10 @@ import {CompletedCoursesDialogComponent} from "../completed-courses-dialog/compl
 
 @Component({
   selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.css']
+  templateUrl: './course.component.html',
+  styleUrls: ['./course.component.css']
 })
-export class CoursesComponent implements OnInit {
+export class CourseComponent implements OnInit {
   courses: Course[] = [];
 
   constructor(public dialog: MatDialog, private axiosService: AxiosService) {

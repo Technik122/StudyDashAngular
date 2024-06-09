@@ -7,16 +7,16 @@ import {Course} from "../course";
 
 @Component({
   selector: 'app-task-dialog',
-  templateUrl: './task-dialog.component.html',
-  styleUrls: ['./task-dialog.component.css']
+  templateUrl: './todo-dialog.component.html',
+  styleUrls: ['./todo-dialog.component.css']
 })
-export class TaskDialogComponent implements OnInit {
+export class TodoDialogComponent implements OnInit {
   taskForm: FormGroup;
   courses: Course[] = [];
 
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<TaskDialogComponent>,
+    public dialogRef: MatDialogRef<TodoDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private axiosService: AxiosService
   ) {
