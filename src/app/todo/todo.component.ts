@@ -7,6 +7,7 @@ import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-del
 import {Subtask} from "../subtask";
 import {CompletedToDosDialogComponent} from "../completed-to-dos-dialog/completed-to-dos-dialog.component";
 import {Course} from "../course";
+import {CourseService} from "../course.service";
 
 @Component({
   selector: 'app-tasks',
@@ -21,10 +22,13 @@ export class TodoComponent implements OnInit {
   courses: Course[] = [];
   courseColors: Map<string, string> = new Map();
 
-  constructor(public dialog: MatDialog, private axiosService: AxiosService) {}
+  constructor(public dialog: MatDialog, private axiosService: AxiosService, private courseService: CourseService) {
+    this.courseService.colorChanged.subscribe(async () => {
+      await this.loadToDosAndSubtasks();
+    });
+  }
 
   async ngOnInit() {
-    await this.loadCourses();
     await this.loadToDosAndSubtasks();
   }
 

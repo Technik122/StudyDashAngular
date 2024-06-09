@@ -4,8 +4,9 @@ import {Subject} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class GradeServiceService {
+export class CourseService {
   constructor() { }
 
   grandeChanged = new Subject<void>();
+  colorChanged = new Subject<void>();
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AxiosService} from "../axios.service";
 import {NotificationsService} from "angular2-notifications";
-import {GradeServiceService} from "../grade-service.service";
+import {CourseService} from "../course.service";
 
 @Component({
   selector: 'app-grade-average',
@@ -12,7 +12,7 @@ export class GradeAverageComponent implements OnInit {
   averageGrade: number;
   message: string;
 
-  constructor(private axiosService: AxiosService, private notificationsService: NotificationsService, private gradeService: GradeServiceService) {
+  constructor(private axiosService: AxiosService, private notificationsService: NotificationsService, private gradeService: CourseService) {
     this.averageGrade = 0;
     this.message = '';
 

@@ -2,7 +2,7 @@ import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NotificationsService} from "angular2-notifications";
-import {GradeServiceService} from "../grade-service.service";
+import {CourseService} from "../course.service";
 
 @Component({
   selector: 'app-course-dialog',
@@ -20,7 +20,7 @@ export class CourseDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<CourseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private notificationsService: NotificationsService,
-    private gradeService: GradeServiceService
+    private courseService: CourseService
   ) {
     this.courseForm = this.fb.group({
       name: [data.name || '', [Validators.required, Validators.maxLength(50)]],
@@ -62,7 +62,10 @@ export class CourseDialogComponent implements OnInit {
         } else {
           this.notificationsService.warn('Note hinzugefügt 😞', `Schade!`, {timeOut: 10000});
         }
-        this.gradeService.grandeChanged.next();
+        this.courseService.grandeChanged.next();
+      }
+      if (this.courseForm.get('color')?.dirty) {
+        this.courseService.colorChanged.next();
       }
     }
   }
