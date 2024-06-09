@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Add Event</h1>
+<div mat-dialog-content>
+  <p>Event for {{data.date | date}}</p>
+  <mat-form-field>
+    <mat-label>Event Name</mat-label>
+    <input matInput [(ngModel)]="eventName">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="addEvent()">Add</button>
+</div>

@@ -36,6 +36,11 @@ import {TokenInterceptor} from "./TokenInterceptor";
 import {SimpleNotificationsModule} from "angular2-notifications";
 import { CompletedCoursesDialogComponent } from './completed-courses-dialog/completed-courses-dialog.component';
 import { CompletedToDosDialogComponent } from './completed-to-dos-dialog/completed-to-dos-dialog.component';
+import { WeatherWidgetComponent } from './weather-widget/weather-widget.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarWidgetComponent } from './calendar-widget/calendar-widget.component';
+import { EventDialogComponent } from './event-dialog/event-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +57,10 @@ import { CompletedToDosDialogComponent } from './completed-to-dos-dialog/complet
     ConfirmDeleteDialogComponent,
     SubtaskComponent,
     CompletedCoursesDialogComponent,
-    CompletedToDosDialogComponent
+    CompletedToDosDialogComponent,
+    WeatherWidgetComponent,
+    CalendarWidgetComponent,
+    EventDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +81,10 @@ import { CompletedToDosDialogComponent } from './completed-to-dos-dialog/complet
     MatIconModule,
     MatNativeDateModule,
     SimpleNotificationsModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [AxiosService, provideAnimationsAsync(), {
     provide: HTTP_INTERCEPTORS,

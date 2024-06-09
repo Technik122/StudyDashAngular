@@ -1,0 +1,9 @@
+<div class="weather">
+  <div class="search-container">
+    <input type="text" [(ngModel)]="location" placeholder="Ort eingeben" class="search-input" />
+    <button (click)="updateWeatherWidget()" class="search-button">
+      <img src="/assets/search%20icon.png" alt="Suchen" class="search-icon" />
+    </button>
+  </div>
+  <div id="weather"></div>
+</div>
