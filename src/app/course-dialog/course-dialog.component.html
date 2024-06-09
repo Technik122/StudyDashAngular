@@ -10,7 +10,9 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Semester</mat-label>
-      <input matInput formControlName="semester">
+      <mat-select formControlName="semester">
+        <mat-option *ngFor="let i of semesters" [value]="i">{{i}}</mat-option>
+      </mat-select>
       <mat-error *ngIf="courseForm.get('semester')?.hasError('required')">Semester ist erforderlich.</mat-error>
     </mat-form-field>
 

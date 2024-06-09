@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NotificationsService} from "angular2-notifications";
 import {GradeServiceService} from "../grade-service.service";
 
@@ -11,6 +11,7 @@ import {GradeServiceService} from "../grade-service.service";
 })
 export class CourseDialogComponent implements OnInit {
   courseForm: FormGroup;
+  semesters: number[] = Array.from({length: 10}, (_, i) => i + 1);
 
   @Output() courseEdited = new EventEmitter<void>();
 
@@ -26,7 +27,7 @@ export class CourseDialogComponent implements OnInit {
       semester: [data.semeter || '', [Validators.required, Validators.min(1), Validators.max(10)]],
       exam: [data.exam || '', [Validators.required, Validators.maxLength(50)]],
       examDate: [data.examDate || ''],
-      grade: [data.grade || ''],
+      grade: [data.grade || '', [this.gradeFormatValidator]],
       color: [data.color || '']
     });
   }
@@ -64,5 +65,11 @@ export class CourseDialogComponent implements OnInit {
         this.gradeService.grandeChanged.next();
       }
     }
+  }
+
+  gradeFormatValidator(control: FormControl) {
+    const value = control.value;
+    const valid = /^\d+(\.\d{1,2})?$/.test(value);
+    return valid ? null : { invalidGrade: true };
   }
 }
