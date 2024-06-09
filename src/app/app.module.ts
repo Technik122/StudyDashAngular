@@ -39,6 +39,7 @@ import {CompletedToDosDialogComponent} from './completed-to-dos-dialog/completed
 import {CalendarComponent} from './calendar/calendar.component';
 import {CalendarModule, DateAdapter} from "angular-calendar";
 import {adapterFactory} from "angular-calendar/date-adapters/moment";
+import { GradeAverageComponent } from './grade-average/grade-average.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import {adapterFactory} from "angular-calendar/date-adapters/moment";
     SubtaskComponent,
     CompletedCoursesDialogComponent,
     CompletedToDosDialogComponent,
-    CalendarComponent
+    CalendarComponent,
+    GradeAverageComponent
   ],
   imports: [
     BrowserModule,
