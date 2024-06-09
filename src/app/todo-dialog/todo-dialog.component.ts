@@ -59,7 +59,7 @@ export class TodoDialogComponent implements OnInit {
     }
 
     const response = await this.axiosService.getCoursesByUser();
-    this.courses = response.data;
+    this.courses = response.data.filter((course: Course) => !course.completed);
   }
 
 
