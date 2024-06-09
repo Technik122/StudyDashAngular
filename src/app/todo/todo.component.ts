@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AxiosService} from "../axios.service";
-import {ToDo} from "../to-do";
+import {Todo} from "../todo";
 import {MatDialog} from "@angular/material/dialog";
-import {TaskDialogComponent} from "../task-dialog/task-dialog.component";
+import {TodoDialogComponent} from "../todo-dialog/todo-dialog.component";
 import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
 import {Subtask} from "../subtask";
 import {CompletedToDosDialogComponent} from "../completed-to-dos-dialog/completed-to-dos-dialog.component";
@@ -10,13 +10,13 @@ import {Course} from "../course";
 
 @Component({
   selector: 'app-tasks',
-  templateUrl: './tasks.component.html',
-  styleUrl: './tasks.component.css',
+  templateUrl: './todo.component.html',
+  styleUrl: './todo.component.css',
 })
-export class TasksComponent implements OnInit {
+export class TodoComponent implements OnInit {
   priorities = ['HOCH', 'MITTEL', 'NIEDRIG'];
-  toDos: ToDo[] = [];
-  completedToDos: ToDo[] = [];
+  toDos: Todo[] = [];
+  completedToDos: Todo[] = [];
   subtasks: Map<string, Subtask[]> = new Map();
   courses: Course[] = [];
   courseColors: Map<string, string> = new Map();
@@ -28,19 +28,19 @@ export class TasksComponent implements OnInit {
     await this.loadToDosAndSubtasks();
   }
 
-  async markAsCompleted(toDo: ToDo) {
+  async markAsCompleted(toDo: Todo) {
     toDo.completed = true;
     await this.axiosService.updateToDo(toDo.id, toDo);
     await this.loadToDosAndSubtasks();
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(TaskDialogComponent, {
+    const dialogRef = this.dialog.open(TodoDialogComponent, {
       width: '400px',
       data: {}
     });
 
-    dialogRef.afterClosed().subscribe(async (result: ToDo) => {
+    dialogRef.afterClosed().subscribe(async (result: Todo) => {
       if (result) {
         await this.loadToDosAndSubtasks();
       }
@@ -62,13 +62,13 @@ export class TasksComponent implements OnInit {
     await this.loadToDosAndSubtasks();
   }
 
-  async editTask(task: ToDo) {
-    const dialogRef = this.dialog.open(TaskDialogComponent, {
+  async editTask(task: Todo) {
+    const dialogRef = this.dialog.open(TodoDialogComponent, {
       width: '400px',
       data: { ...task, isEdit: true }
     });
 
-    dialogRef.afterClosed().subscribe(async (result: ToDo) => {
+    dialogRef.afterClosed().subscribe(async (result: Todo) => {
       if (result) {
         await this.axiosService.updateToDo(task.id, result);
         await this.loadToDosAndSubtasks();
@@ -78,8 +78,8 @@ export class TasksComponent implements OnInit {
 
   async loadToDosAndSubtasks(): Promise<void> {
     const response = await this.axiosService.getToDosByUser();
-    this.toDos = response.data.filter((todo: ToDo) => !todo.completed);
-    this.completedToDos = response.data.filter((todo: ToDo) => todo.completed);
+    this.toDos = response.data.filter((todo: Todo) => !todo.completed);
+    this.completedToDos = response.data.filter((todo: Todo) => todo.completed);
     await this.loadCourses();
 
     for (const toDo of this.toDos) {

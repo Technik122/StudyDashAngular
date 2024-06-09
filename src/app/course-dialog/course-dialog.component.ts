@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -7,8 +7,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './course-dialog.component.html',
   styleUrls: ['./course-dialog.component.css']
 })
-export class CourseDialogComponent {
+export class CourseDialogComponent implements OnInit {
   courseForm: FormGroup;
+
+  @Output() courseEdited = new EventEmitter<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -47,6 +49,7 @@ export class CourseDialogComponent {
   onSave(): void {
     if (this.courseForm.valid) {
       this.dialogRef.close(this.courseForm.value);
+      this.courseEdited.emit();
     }
   }
 }

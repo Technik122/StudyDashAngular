@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Course} from "../course";
-import {ToDo} from "../to-do";
+import {Todo} from "../todo";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AxiosService} from "../axios.service";
 import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
@@ -14,8 +14,8 @@ import {Subtask} from "../subtask";
 export class CompletedToDosDialogComponent implements OnInit  {
   @Output() toDoUncompleted: EventEmitter<void> = new EventEmitter();
 
-  completedToDos: { [key: string]: ToDo[] } = {};
-  outputToDos: ToDo[] = [];
+  completedToDos: { [key: string]: Todo[] } = {};
+  outputToDos: Todo[] = [];
   subtasks: Map<string, Subtask[]> = new Map();
 
   constructor(public dialog: MatDialog, private axiosService: AxiosService, public dialogRef: MatDialogRef<CompletedToDosDialogComponent>){}
@@ -24,7 +24,7 @@ export class CompletedToDosDialogComponent implements OnInit  {
     const response = await this.axiosService.getToDosByUser()
     const completedToDos = response.data.filter((course: Course) => course.completed);
 
-    this.completedToDos = completedToDos.reduce((acc: { [key:string]: ToDo[] }, toDo: ToDo) => {
+    this.completedToDos = completedToDos.reduce((acc: { [key:string]: Todo[] }, toDo: Todo) => {
       const deadLineDate = new Date(toDo.deadLine);
       const yearMonthKey = new Intl.DateTimeFormat('en', { year: 'numeric',
         month: '2-digit' }).format(deadLineDate);
@@ -43,14 +43,14 @@ export class CompletedToDosDialogComponent implements OnInit  {
     }
   }
 
-  async markAsUncompleted(toDo: ToDo) {
+  async markAsUncompleted(toDo: Todo) {
     toDo.completed = false;
     await this.axiosService.updateToDo(toDo.id, toDo);
     await this.ngOnInit();
     this.toDoUncompleted.emit();
   }
 
-  async confirmDeleteCourse(toDo: ToDo) {
+  async confirmDeleteCourse(toDo: Todo) {
     const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent);
 
     dialogRef.afterClosed().subscribe(async result => {
@@ -60,7 +60,7 @@ export class CompletedToDosDialogComponent implements OnInit  {
     });
   }
 
-  private async deleteToDo(toDo: ToDo): Promise<void> {
+  private async deleteToDo(toDo: Todo): Promise<void> {
     await this.axiosService.deleteCourse(toDo.id);
     await this.ngOnInit();
   }
