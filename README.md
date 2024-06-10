@@ -1,27 +1,22 @@
 # StudyDashAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
+StudyDashAngular ist das **Frontend** der StudyDash-Anwendung, die auf Angular und npm basiert. Es bietet eine Reihe von Funktionen, die speziell auf die Bedürfnisse von Studierenden zugeschnitten sind und sendet Anfragen an HTTP-Endpoints des Backends.
 
-## Development server
+## Projektinformationen
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Dieses Projekt wurde im Sommersemester 2024 an der IU Internationale Hochschule in Hamburg für das Modul Fallstudie: Software-Engineering erstellt.
 
-## Code scaffolding
+## Funktionen
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **ToDo-Verwaltung**: Studierende können ihre Aufgaben und Verpflichtungen in einer übersichtlichen Liste verwalten.
+- **Kursverwaltung**: Studierende können ihre Kurse verwalten und haben einen Überblick über ihre aktuellen Prüfungsleistungen.
+- **Notizenverwaltung**: Studierende können Notizen zu ihren Kursen und Aufgaben machen und diese Notizen verwalten.
+- **Notenverwaltung**: Studierende können ihre Noten eintragen und den Durchschnitt berechnen. Es gibt auch ein Anreizbenachrichtigungssystem, das Studierende dazu ermutigt, ihre Noten zu verbessern.
 
-## Build
+## Installation und Verwendung
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Da es sich um ein Angular-Projekt handelt, können Sie es einfach mit dem Befehl `npm install` bauen und dann mit `ng serve` ausführen. Navigieren Sie zu `http://localhost:4200/`. Die Anwendung wird automatisch neu geladen, wenn Sie die Quelldateien ändern.
 
-## Running unit tests
+## Weitere Hilfe
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Um weitere Hilfe zum Angular CLI zu erhalten, verwenden Sie `ng help` oder besuchen Sie die [Angular CLI Overview and Command Reference](https://angular.io/cli) Seite.
