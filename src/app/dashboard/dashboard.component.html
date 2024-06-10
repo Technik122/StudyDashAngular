@@ -1,7 +1,14 @@
 <div class="dashboard">
-  <div class="dashboard-header">
-    <h1>Dashboard</h1>
-    <button mat-button class="small-button" (click)="logout()">Ausloggen</button>
+  <div class="dashboard-header-container">
+    <div class="dashboard-header" [ngStyle]="{'background-image': 'url(' + headerImage + ')'}">
+      <div class="button-group">
+        <button class="button" (click)="triggerFileInput()">Hochladen</button>
+        <input type="file" id="fileInput" (change)="onImageSelected($event)" class="image-input">
+        <button *ngIf="headerImage" class="button" (click)="openImageSelectionModal()">Standard Bild ändern</button>
+        <button *ngIf="headerImage" class="button" (click)="removeImage()">Zurücksetzen</button>
+      </div>
+    </div>
+
   </div>
 
   <div class="dashboard-content">
@@ -19,3 +26,5 @@
     <app-weather-widget></app-weather-widget>
   </div>
 </div>
+
+<button mat-raised-button color="primary" class="logout-button" (click)="logout()">Ausloggen</button>

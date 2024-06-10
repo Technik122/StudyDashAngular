@@ -42,6 +42,7 @@ import {CompletedToDosDialogComponent} from './completed-to-dos-dialog/completed
 import {GradeAverageComponent} from './grade-average/grade-average.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {TodoService} from "./todo.service";
+import {ImageSelectionComponent} from './image-selection/image-selection.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import {TodoService} from "./todo.service";
     GradeAverageComponent,
     WeatherWidgetComponent,
     CalendarWidgetComponent,
-    EventDialogComponent
+    EventDialogComponent,
+    ImageSelectionComponent
   ],
   imports: [
     BrowserModule,
