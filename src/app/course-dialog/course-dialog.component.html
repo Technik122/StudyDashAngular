@@ -33,7 +33,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Note</mat-label>
-      <input matInput formControlName="grade">
+      <input matInput formControlName="grade" (input)="replaceCommaWithDot($event)">
     </mat-form-field>
 
     <mat-form-field appearance="fill">

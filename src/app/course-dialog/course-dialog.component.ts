@@ -75,4 +75,11 @@ export class CourseDialogComponent implements OnInit {
     const valid = /^\d+(\.\d{1,2})?$/.test(value);
     return valid ? null : { invalidGrade: true };
   }
+
+  replaceCommaWithDot(event: any): void {
+    const value = event.target.value;
+    if (value.includes(',')) {
+      this.courseForm.get('grade')?.setValue(value.replace(',', '.'));
+    }
+  }
 }
