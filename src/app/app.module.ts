@@ -39,6 +39,7 @@ import {CalendarWidgetComponent} from './calendar-widget/calendar-widget.compone
 import {EventDialogComponent} from './event-dialog/event-dialog.component';
 import {CompletedCoursesDialogComponent} from './completed-courses-dialog/completed-courses-dialog.component';
 import {CompletedToDosDialogComponent} from './completed-to-dos-dialog/completed-to-dos-dialog.component';
+import {GradeAverageComponent} from './grade-average/grade-average.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import {CompletedToDosDialogComponent} from './completed-to-dos-dialog/completed
     SubtaskComponent,
     CompletedCoursesDialogComponent,
     CompletedToDosDialogComponent,
+    GradeAverageComponent,
     WeatherWidgetComponent,
     CalendarWidgetComponent,
     EventDialogComponent
@@ -78,7 +80,7 @@ import {CompletedToDosDialogComponent} from './completed-to-dos-dialog/completed
     MatButtonModule,
     MatIconModule,
     MatNativeDateModule,
-    SimpleNotificationsModule.forRoot(),
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [AxiosService, provideAnimationsAsync(), {
     provide: HTTP_INTERCEPTORS,

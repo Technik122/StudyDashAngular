@@ -17,7 +17,6 @@ export class LoginComponent {
 
   onSubmitLogin(): void {
     this.axiosService.login({"username": this.username, "password": this.password}).then((response) => {
-      console.log(response);
       localStorage.setItem('auth_token', response.data.token);
       this.onSubmitLoginEvent.emit(response);
       this.router.navigate(['/dashboard']);

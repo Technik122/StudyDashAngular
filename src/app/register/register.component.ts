@@ -17,7 +17,6 @@ export class RegisterComponent {
 
   onSubmitRegister(): void {
     this.axiosService.register({"username": this.username, "password": this.password }).then((response) => {
-      console.log(response);
       this.onSubmitRegisterEvent.emit(response);
       this.router.navigate(['/login']);
     }).catch((error) => {

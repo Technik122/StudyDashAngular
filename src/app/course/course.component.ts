@@ -26,6 +26,7 @@ export class CourseComponent implements OnInit {
   async refreshCourses(): Promise<void> {
     const response = await this.axiosService.getCoursesByUser();
     this.courses = response.data.filter((course:Course) => !course.completed);
+    this.courses.sort((a, b) => new Date(a.examDate).getTime() - new Date(b.examDate).getTime());
   }
 
   async openCourseDialog(): Promise<void> {
