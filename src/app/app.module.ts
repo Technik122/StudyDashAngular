@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, OnInit} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -41,6 +41,7 @@ import {CompletedCoursesDialogComponent} from './completed-courses-dialog/comple
 import {CompletedToDosDialogComponent} from './completed-to-dos-dialog/completed-to-dos-dialog.component';
 import {GradeAverageComponent} from './grade-average/grade-average.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {TodoService} from "./todo.service";
 
 @NgModule({
   declarations: [
@@ -91,4 +92,10 @@ import {MatMenuModule} from '@angular/material/menu';
   }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule implements OnInit {
+  constructor (private toDoService: TodoService) {}
+
+  ngOnInit(): void {
+    this.toDoService.checkToDos();
+  }
+}

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import axios, {AxiosError, AxiosResponse} from 'axios';
 import {Todo} from "./todo";
 import {Course} from "./course";
@@ -10,6 +10,7 @@ import {NotificationsService} from "angular2-notifications";
   providedIn: 'root'
 })
 export class AxiosService {
+  todoAddedOrChanged = new EventEmitter<Todo>();
 
   constructor(private notificationsService: NotificationsService) {
     axios.defaults.baseURL = "http://localhost:8080"
@@ -127,8 +128,9 @@ export class AxiosService {
     return this.request('GET', '/todos/user', null);
   }
 
-  async createToDo(todo: Todo): Promise<AxiosResponse> {
-    return this.request('POST', '/todos/add', todo);
+  async createToDo(toDo: Todo): Promise<AxiosResponse> {
+    this.todoAddedOrChanged.emit(toDo);
+    return this.request('POST', '/todos/add', toDo);
   }
 
   async deleteToDo(id: string): Promise<AxiosResponse> {
@@ -136,6 +138,7 @@ export class AxiosService {
   }
 
   async updateToDo(id: string, updatedToDo: Todo): Promise<AxiosResponse> {
+    this.todoAddedOrChanged.emit(updatedToDo);
     return this.request('PUT', `/todos/update/${id}`, updatedToDo);
   }
 
