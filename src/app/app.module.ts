@@ -40,6 +40,7 @@ import {EventDialogComponent} from './event-dialog/event-dialog.component';
 import {CompletedCoursesDialogComponent} from './completed-courses-dialog/completed-courses-dialog.component';
 import {CompletedToDosDialogComponent} from './completed-to-dos-dialog/completed-to-dos-dialog.component';
 import {GradeAverageComponent} from './grade-average/grade-average.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import {GradeAverageComponent} from './grade-average/grade-average.component';
     MatButtonModule,
     MatIconModule,
     MatNativeDateModule,
-    SimpleNotificationsModule.forRoot()
+    SimpleNotificationsModule.forRoot(),
+    MatMenuModule
   ],
   providers: [AxiosService, provideAnimationsAsync(), {
     provide: HTTP_INTERCEPTORS,

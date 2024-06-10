@@ -131,4 +131,24 @@ export class TodoComponent implements OnInit {
     const course = this.courses.find(course => course.id === courseId);
     return course ? course.name : '';
   }
+
+  sortToDos(option: string): void {
+    switch (option) {
+      case 'priority':
+        this.toDos.sort((a, b) => this.priorities.indexOf(a.priority) - this.priorities.indexOf(b.priority));
+        break;
+      case 'deadline':
+        this.toDos.sort((a, b) => new Date(a.deadLine).getTime() - new Date(b.deadLine).getTime());
+        break;
+      case 'course':
+        this.toDos.sort((a, b) => {
+          const courseA = this.courses.find(course => course.id === a.course);
+          const courseB = this.courses.find(course => course.id === b.course);
+          const dateA = courseA?.examDate ? new Date(courseA.examDate).getTime() : 0;
+          const dateB = courseB?.examDate ? new Date(courseB.examDate).getTime() : 0;
+          return dateA - dateB;
+        });
+        break;
+    }
+  }
 }

@@ -20,7 +20,6 @@ export class CalendarWidgetComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // Handle the result if needed
     });
   }
 }
