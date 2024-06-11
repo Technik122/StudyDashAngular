@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {Subject} from "rxjs";
 
 @Injectable({
@@ -7,6 +7,10 @@ import {Subject} from "rxjs";
 export class CourseService {
   constructor() { }
 
-  grandeChanged = new Subject<void>();
+  gradeChanged = new Subject<void>();
   colorChanged = new Subject<void>();
+
+  courseAdded = new EventEmitter<void>();
+  courseChanged = new EventEmitter<void>();
+  courseDeleted = new EventEmitter<void>();
 }

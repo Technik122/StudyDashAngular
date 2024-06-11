@@ -62,7 +62,7 @@ export class CourseDialogComponent implements OnInit {
         } else {
           this.notificationsService.warn('Note hinzugefügt 😞', `Schade!`, {timeOut: 10000});
         }
-        this.courseService.grandeChanged.next();
+        this.courseService.gradeChanged.next();
       }
       if (this.courseForm.get('color')?.dirty) {
         this.courseService.colorChanged.next();

@@ -1,4 +1,4 @@
 <div class="calendar">
-  <mat-calendar [dateClass]="dateClass()" [selected]="selectedDate" (selectedChange)="openDialog($event)">
+  <mat-calendar [dateClass]="(dateClass() | async) ?? defaultDateClass" [selected]="selectedDate" (selectedChange)="openDialog($event)">
   </mat-calendar>
 </div>

@@ -16,7 +16,7 @@ export class GradeAverageComponent implements OnInit {
     this.averageGrade = 0;
     this.message = '';
 
-    this.gradeService.grandeChanged.subscribe(() => {
+    this.gradeService.gradeChanged.subscribe(() => {
       this.refreshGrade();
     })
   }

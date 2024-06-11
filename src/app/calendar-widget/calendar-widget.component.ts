@@ -5,6 +5,8 @@ import {MatCalendar, MatCalendarCellCssClasses} from "@angular/material/datepick
 import {AxiosService} from "../axios.service";
 import {Event} from "../event";
 import {Course} from "../course";
+import {CourseService} from "../course.service";
+import {BehaviorSubject, combineLatest, map} from "rxjs";
 
 @Component({
   selector: 'app-calendar-widget',
@@ -18,6 +20,8 @@ export class CalendarWidgetComponent implements OnInit {
   courses: Course[] = [];
   private courseColorClasses = new Map<string, string>();
   private eventColorClasses = new Map<string, string>();
+  events$ = new BehaviorSubject<Event[]>([]);
+  courses$ = new BehaviorSubject<Course[]>([]);
 
   generateCourseColorClasses() {
     this.courses.forEach(course => {
@@ -51,10 +55,25 @@ export class CalendarWidgetComponent implements OnInit {
 
   @ViewChild(MatCalendar) calendar!: MatCalendar<Date>;
 
-  constructor(public dialog: MatDialog, private axiosService: AxiosService) {}
+  constructor(public dialog: MatDialog, private axiosService: AxiosService, private courseService: CourseService) {
+  }
 
   async ngOnInit() {
     await this.fetchEvents();
+
+
+
+    this.courseService.courseAdded.subscribe(async () => {
+      await this.fetchEvents();
+    });
+
+    this.courseService.courseChanged.subscribe(async () => {
+      await this.fetchEvents();
+    });
+
+    this.courseService.courseDeleted.subscribe(async () => {
+      await this.fetchEvents();
+    });
   }
 
   async createCourseEvent(course: Course): Promise<void> {
@@ -79,10 +98,11 @@ export class CalendarWidgetComponent implements OnInit {
       return event;
     });
     this.generateEventColorClasses();
+    this.events$.next(this.events);
 
     // Courses
     const courseResponse = await this.axiosService.getCoursesByUser();
-    this.courses = courseResponse.data.filter((course:Course) => !course.completed);
+    this.courses = courseResponse.data.filter((course: Course) => !course.completed);
     this.generateCourseColorClasses();
     const courses = this.courses.map((course: Course) => {
       if (course.examDate) {
@@ -97,6 +117,7 @@ export class CalendarWidgetComponent implements OnInit {
       return course;
     });
 
+    this.courses$.next(this.courses);
     this.events = [...this.events, ...courses];
     this.calendar.updateTodaysDate();
   }
@@ -114,7 +135,7 @@ export class CalendarWidgetComponent implements OnInit {
       });
 
       const dialogRef = this.dialog.open(EventDialogComponent, {
-        width: '250px',
+        width: '400px',
         data: {date, event: event || new Event(undefined, undefined, date.toISOString()), isEdit: !!event}
       });
 
@@ -127,33 +148,41 @@ export class CalendarWidgetComponent implements OnInit {
   }
 
   dateClass() {
-    const dateColors = new Map<string, string>();
+    return combineLatest([this.events$, this.courses$]).pipe(
+      map(([events, courses]) => {
+        const dateColors = new Map<string, string>();
 
-    // Set color for course exams
-    this.courses.forEach(course => {
-      if (course.examDate) {
-        const examDate = new Date(course.examDate).toISOString().split('T')[0];
-        dateColors.set(examDate, this.courseColorClasses.get(course.id) || '');
-      }
-    });
+        // Set color for course exams
+        courses.forEach(course => {
+          if (course.examDate) {
+            const examDate = new Date(course.examDate).toISOString().split('T')[0];
+            dateColors.set(examDate, this.courseColorClasses.get(course.id) || '');
+          }
+        });
 
-    // Set color for events
-    this.events.forEach(event => {
-      if (event.date) {
-        const eventDate = new Date(event.date).toISOString().split('T')[0];
-        if (event.id) {
-          dateColors.set(eventDate, this.eventColorClasses.get(event.id) || '');
-        }
-      }
-    });
+        // Set color for events
+        events.forEach(event => {
+          if (event.date) {
+            const eventDate = new Date(event.date).toISOString().split('T')[0];
+            if (event.id) {
+              dateColors.set(eventDate, this.eventColorClasses.get(event.id) || '');
+            }
+          }
+        });
 
-    return (date: Date, view: 'month' | 'year' | 'multi-year'): MatCalendarCellCssClasses => {
-      if (view === 'month') {
-        const colorDate = date.toISOString().split('T')[0];
-        const colorClass = dateColors.get(colorDate);
-        return colorClass || '';
-      }
-      return '';
-    };
+        return (date: Date, view: 'month' | 'year' | 'multi-year'): MatCalendarCellCssClasses => {
+          if (view === 'month') {
+            const colorDate = date.toISOString().split('T')[0];
+            const colorClass = dateColors.get(colorDate);
+            return colorClass || '';
+          }
+          return '';
+        };
+      })
+    );
   }
+
+  defaultDateClass = (date: Date, view: 'month' | 'year' | 'multi-year'): MatCalendarCellCssClasses => {
+    return '';
+  };
 }

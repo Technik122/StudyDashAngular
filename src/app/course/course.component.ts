@@ -5,6 +5,7 @@ import {AxiosService} from "../axios.service";
 import {Course} from "../course";
 import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
 import {CompletedCoursesDialogComponent} from "../completed-courses-dialog/completed-courses-dialog.component";
+import {CourseService} from "../course.service";
 
 @Component({
   selector: 'app-courses',
@@ -15,7 +16,7 @@ export class CourseComponent implements OnInit {
   courses: Course[] = [];
   courseToDosCount: Map<string, number> = new Map();
 
-  constructor(public dialog: MatDialog, private axiosService: AxiosService) {
+  constructor(public dialog: MatDialog, private axiosService: AxiosService, private courseService: CourseService) {
   }
 
   async ngOnInit() {
@@ -38,6 +39,7 @@ export class CourseComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async result => {
       if (result) {
         await this.axiosService.createCourse(result)
+        this.courseService.courseAdded.emit();
         await this.refreshCourses();
       }
     });
@@ -52,6 +54,7 @@ export class CourseComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async result => {
       if (result) {
         await this.axiosService.updateCourse(course.id, result);
+        this.courseService.courseChanged.emit();
         await this.refreshCourses();
       }
     });
@@ -63,6 +66,7 @@ export class CourseComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async result => {
       if (result) {
         await this.deleteCourse(course);
+        this.courseService.courseDeleted.emit();
       }
     });
   }
