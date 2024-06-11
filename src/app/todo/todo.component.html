@@ -26,8 +26,8 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div>
-        <app-subtask *ngFor="let subtask of subtasks.get(todo.id)" [subtask]="subtask"></app-subtask>
-
+        <app-subtask class="subtask" *ngFor="let subtask of subtasks.get(todo.id)" [subtask]="subtask"></app-subtask>
+        <br>
         <mat-label>Priorität</mat-label>
         <br>
         <strong>{{ todo.priority }}</strong>

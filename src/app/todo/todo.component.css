@@ -30,7 +30,9 @@
 }
 
 .mat-expansion-panel-header.mat-expanded .colored-part {
-  background-color: transparent !important;
+  height: 53px;
+  margin-bottom: 30px;
+  border-bottom-left-radius: 0;
 }
 
 .mat-expansion-panel.mat-expanded {
@@ -52,11 +54,17 @@
 .description-text {
   color: #000000;
   white-space: nowrap;
+  font-size: 1.1em;
+  }
+
+.mat-expansion-panel-header.mat-expanded .description-text {
+  padding-top: 20px;
 }
 
 .mat-panel-description {
   margin-left: auto;
   padding: 10px 16px;
+  font-size: 1.1em;
 }
 
 .task-actions {
@@ -73,4 +81,13 @@
   width: 100%;
   border-top: 1px solid #000;
   margin: 20px 0;
+}
+
+mat-label, strong {
+  font-size: 1.1em;
+  gap: 10px;
+}
+
+.subtask {
+  font-size: 1.1em;
 }
