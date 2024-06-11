@@ -47,10 +47,18 @@ export class GradeAverageComponent implements OnInit {
   }
 
   generateMessage() {
-    if (this.averageGrade < 3.0) {
-      this.message = "Weiter so!";
+    if (this.averageGrade < 1.0) {
+      this.message = "Ausgezeichnet! Weiter so!";
+    } else if (this.averageGrade < 2.9) {
+      this.message = "Sehr gut! Du machst das großartig!";
+    } else if (this.averageGrade < 3.9) {
+      this.message = "Gut gemacht! Aber es gibt immer Raum für Verbesserungen.";
+    } else if (this.averageGrade < 4.9) {
+      this.message = "Nicht schlecht, aber du kannst es besser!";
+    } else if (this.averageGrade < 5.9) {
+      this.message = "Es ist Zeit, sich mehr anzustrengen. Du kannst es schaffen!";
     } else {
-      this.message = "Du kannst es besser!";
+      this.message = "Lass den Kopf nicht hängen. Jeder hat Raum für Verbesserungen!";
     }
   }
 
