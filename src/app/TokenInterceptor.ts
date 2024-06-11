@@ -1,4 +1,4 @@
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import {AxiosService} from "./axios.service";
 import {catchError, from, Observable, switchMap, throwError} from "rxjs";
 import {Injectable} from "@angular/core";

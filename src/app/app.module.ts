@@ -1,7 +1,7 @@
 import {NgModule, OnInit} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
 
@@ -45,57 +45,50 @@ import {TodoService} from "./todo.service";
 import {ImageSelectionComponent} from './image-selection/image-selection.component';
 import { ConsentDialogComponent } from './consent-dialog/consent-dialog.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    TodoComponent,
-    NotesComponent,
-    CourseComponent,
-    DashboardComponent,
-    RegisterComponent,
-    TodoDialogComponent,
-    NoteDialogComponent,
-    CourseDialogComponent,
-    ConfirmDeleteDialogComponent,
-    SubtaskComponent,
-    CompletedCoursesDialogComponent,
-    CompletedToDosDialogComponent,
-    GradeAverageComponent,
-    WeatherWidgetComponent,
-    CalendarWidgetComponent,
-    EventDialogComponent,
-    ImageSelectionComponent,
-    ConsentDialogComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatExpansionModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
-    MatNativeDateModule,
-    SimpleNotificationsModule.forRoot(),
-    MatMenuModule
-  ],
-  providers: [AxiosService, provideAnimationsAsync(), {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  }],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        LoginComponent,
+        TodoComponent,
+        NotesComponent,
+        CourseComponent,
+        DashboardComponent,
+        RegisterComponent,
+        TodoDialogComponent,
+        NoteDialogComponent,
+        CourseDialogComponent,
+        ConfirmDeleteDialogComponent,
+        SubtaskComponent,
+        CompletedCoursesDialogComponent,
+        CompletedToDosDialogComponent,
+        GradeAverageComponent,
+        WeatherWidgetComponent,
+        CalendarWidgetComponent,
+        EventDialogComponent,
+        ImageSelectionComponent,
+        ConsentDialogComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        FormsModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatExpansionModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatIconModule,
+        MatNativeDateModule,
+        SimpleNotificationsModule.forRoot(),
+        MatMenuModule], providers: [AxiosService, provideAnimationsAsync(), {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+        }, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule implements OnInit {
   constructor (private toDoService: TodoService) {}
 
