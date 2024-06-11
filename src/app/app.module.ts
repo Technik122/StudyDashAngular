@@ -43,6 +43,7 @@ import {GradeAverageComponent} from './grade-average/grade-average.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {TodoService} from "./todo.service";
 import {ImageSelectionComponent} from './image-selection/image-selection.component';
+import { ConsentDialogComponent } from './consent-dialog/consent-dialog.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import {ImageSelectionComponent} from './image-selection/image-selection.compone
     WeatherWidgetComponent,
     CalendarWidgetComponent,
     EventDialogComponent,
-    ImageSelectionComponent
+    ImageSelectionComponent,
+    ConsentDialogComponent
   ],
   imports: [
     BrowserModule,
