@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
+import {Component} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {NoteDialogComponent} from '../note-dialog/note-dialog.component';
 import {AxiosService} from "../axios.service";
 import {Note} from "../note";
 import {ConfirmDeleteDialogComponent} from "../confirm-delete-dialog/confirm-delete-dialog.component";
+import {NoteViewDialogComponent} from '../note-view-dialog/note-view-dialog.component';
 
 @Component({
   selector: 'app-notes',
@@ -18,6 +19,13 @@ export class NotesComponent {
   async ngOnInit() {
     const response = await this.axiosService.getNotesByUser();
     this.notes = response.data;
+  }
+
+  truncate(text: string, maxLength: number): string {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength);
+    }
+    return text;
   }
 
   async openNoteDialog(): Promise<void> {
@@ -62,5 +70,13 @@ export class NotesComponent {
     await this.axiosService.deleteNote(note.id);
     const response = await this.axiosService.getNotesByUser();
     this.notes = response.data;
+  }
+
+  openNoteViewDialog(noteContent: string): void {
+    this.dialog.open(NoteViewDialogComponent, {
+      width: '400px',
+      height: '400px',
+      data: { noteContent: noteContent }
+    });
   }
 }

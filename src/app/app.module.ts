@@ -44,6 +44,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {TodoService} from "./todo.service";
 import {ImageSelectionComponent} from './image-selection/image-selection.component';
 import { ConsentDialogComponent } from './consent-dialog/consent-dialog.component';
+import { NoteViewDialogComponent } from './note-view-dialog/note-view-dialog.component';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -65,7 +66,8 @@ import { ConsentDialogComponent } from './consent-dialog/consent-dialog.componen
         CalendarWidgetComponent,
         EventDialogComponent,
         ImageSelectionComponent,
-        ConsentDialogComponent
+        ConsentDialogComponent,
+        NoteViewDialogComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         FormsModule,

@@ -8,10 +8,13 @@
     <mat-card *ngFor="let note of notes" class="note-card">
       <mat-card-header>
         <mat-card-title>{{ note.title }}</mat-card-title>
-        <mat-card-subtitle>{{ note.date | date:'dd.MM.yyyy' }}</mat-card-subtitle> <!-- Datumsformat angepasst -->
+        <mat-card-subtitle>{{ note.date | date:'dd.MM.yyyy' }}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content>
-        <p>{{ note.content }}</p>
+      <mat-card-content class="note-card-content">
+        <div class="note-content">
+          <p>{{ truncate(note.content, 60) }}</p>
+          <span *ngIf="note.content.length > 60" (click)="openNoteViewDialog(note.content)" class="more-text">[...]</span>
+        </div>
       </mat-card-content>
       <mat-card-actions>
         <button mat-icon-button (click)="editNote(note)">
