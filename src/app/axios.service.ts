@@ -5,6 +5,7 @@ import {Course} from "./course";
 import {Note} from "./note";
 import {Subtask} from "./subtask";
 import {NotificationsService} from "angular2-notifications";
+import {Event} from "./event";
 
 @Injectable({
   providedIn: 'root'
@@ -125,7 +126,7 @@ export class AxiosService {
   }
 
   async getToDosByUser(): Promise<AxiosResponse> {
-    return this.request('GET', '/todos/user', null);
+    return this.request('GET', '/todos/get', null);
   }
 
   async createToDo(toDo: Todo): Promise<AxiosResponse> {
@@ -192,6 +193,22 @@ export class AxiosService {
 
   async deleteSubtask(subtaskId: string): Promise<AxiosResponse> {
     return this.request('DELETE', `/subtasks/delete/${subtaskId}`, null);
+  }
+
+  async getEventsByUser(): Promise<AxiosResponse> {
+    return this.request('GET', '/events/get', null);
+  }
+
+  async createEvent(event: Event): Promise<AxiosResponse> {
+    return this.request('POST', '/events/add', event);
+  }
+
+  async deleteEvent(id: string): Promise<AxiosResponse> {
+    return this.request('DELETE', `/events/delete/${id}`, null);
+  }
+
+  async updateEvent(id: string, updatedEvent: Event): Promise<AxiosResponse> {
+    return this.request('PUT', `/events/update/${id}`, updatedEvent);
   }
 }
 

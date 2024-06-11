@@ -7,3 +7,16 @@
   max-width: 300px;
   margin: 0 auto;
 }
+
+.mat-calendar-body-cell.special-date .mat-calendar-body-cell-content {
+  background-color: green;
+  border-radius: 100%;
+}
+
+.custom-date:hover {
+  background-color: lightgray;
+}
+
+.event-color {
+  border-radius: 100%;
+}

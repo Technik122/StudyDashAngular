@@ -1,3 +1,4 @@
 <div class="calendar">
-  <mat-calendar [selected]="selectedDate" (selectedChange)="openDialog($event)"></mat-calendar>
+  <mat-calendar [dateClass]="dateClass()" [selected]="selectedDate" (selectedChange)="openDialog($event)">
+  </mat-calendar>
 </div>

@@ -6,6 +6,5 @@ export interface Course {
   examDate: string;
   grade?: number;
   completed: boolean;
-  course: string;
   color?: string;
 }

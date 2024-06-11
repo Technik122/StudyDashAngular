@@ -1,12 +1,18 @@
-<h1 mat-dialog-title>Add Event</h1>
+<h1 mat-dialog-title>{{data.isEdit ? 'Event bearbeiten' : 'Neues Event'}}</h1>
 <div mat-dialog-content>
-  <p>Event for {{data.date | date}}</p>
-  <mat-form-field>
-    <mat-label>Event Name</mat-label>
-    <input matInput [(ngModel)]="eventName">
-  </mat-form-field>
+  <p>Ausgewähltes Datum: {{data.date}}</p>
+  <form [formGroup]="eventForm">
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Farbe</mat-label>
+      <input matInput type="color" formControlName="color">
+    </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="addEvent()">Add</button>
+  <button mat-button (click)="onNoClick()">Abbrechen</button>
+  <button mat-button (click)="addUpdateEvent()">Speichern</button>
+  <button mat-button *ngIf="data.isEdit" (click)="deleteEvent()">Löschen</button>
 </div>
