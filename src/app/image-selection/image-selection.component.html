@@ -1,6 +1,11 @@
 <div class="image-selection">
   <h2>Such dir ein Bild aus</h2>
-  <div *ngFor="let image of images" class="images" (click)="selectImage(image)">
-    <img [src]="image" alt="Standard Image" />
+  <button mat-icon-button class="close-button" (click)="closeImageSelection()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div class="images-container">
+    <div *ngFor="let image of images" class="image-tile" (click)="selectImage(image)">
+      <img [src]="image" alt="Standard Image" />
+    </div>
   </div>
 </div>

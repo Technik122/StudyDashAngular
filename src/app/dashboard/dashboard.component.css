@@ -25,7 +25,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 150px;
+  height: 200px;
   position: relative;
 }
 
@@ -86,7 +86,7 @@ body {
   grid-template-rows: auto auto auto;
   gap: 20px;
   position: absolute;
-  top: 200px;
+  top: 250px;
   right: 0;
   padding-bottom: 30px;
 }
@@ -104,4 +104,5 @@ body {
   font-family: 'Poppins', sans-serif;
   font-size: 0.8em;
 }
+
 

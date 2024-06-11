@@ -10,8 +10,12 @@ export class ImageSelectionComponent {
   @Output() imageSelected = new EventEmitter<string>();
 
   images = [
-    'assets/plants_standard.jpg',
-    'assets/plants_standard2.jpg',
+    'assets/leafs_standard.jpg',
+    'assets/grass_standard.jpg',
+    'assets/moon_standard.jpg',
+    'assets/puddle_standard.jpg',
+    'assets/sea_standard.jpg',
+    'assets/elbphilharmonie_standard.jpg',
   ];
 
   constructor(private dialogRef: MatDialogRef<ImageSelectionComponent>) {}
@@ -19,5 +23,9 @@ export class ImageSelectionComponent {
   selectImage(image: string) {
     this.imageSelected.emit(image);
     this.dialogRef.close(image);
+  }
+
+  closeImageSelection() {
+    this.dialogRef.close();
   }
 }

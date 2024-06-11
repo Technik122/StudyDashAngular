@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ImageService } from '../image.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ImageSelectionComponent } from '../image-selection/image-selection.component';
 
 @Component({
@@ -12,12 +13,18 @@ import { ImageSelectionComponent } from '../image-selection/image-selection.comp
 export class DashboardComponent {
   headerImage: string | null = null;
 
-  constructor(private router: Router, private imageService: ImageService, private cdr: ChangeDetectorRef, private dialog: MatDialog) {
+  constructor(
+    private router: Router,
+    private imageService: ImageService,
+    private cdr: ChangeDetectorRef,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {
     const savedImage = this.imageService.getImage();
     if (savedImage) {
       this.headerImage = savedImage;
     } else {
-      this.headerImage = 'assets/plants_standard.jpg';
+      this.headerImage = 'assets/leafs_standard.jpg';
     }
   }
 
@@ -30,11 +37,30 @@ export class DashboardComponent {
     const reader = new FileReader();
 
     reader.onloadend = () => {
+      if (reader.error) {
+        this.showErrorMessage('Fehler beim Laden des Bildes. Bitte versuche es erneut.');
+        return;
+      }
+
       const base64String = reader.result as string;
-      this.imageService.saveImage(base64String);
-      this.headerImage = base64String;
-      this.cdr.detectChanges();
+
+      try {
+        this.imageService.saveImage(base64String);
+        this.headerImage = base64String;
+        this.cdr.detectChanges();
+      } catch (e) {
+        this.showErrorMessage('Das Bild ist zu groß, um im lokalen Speicher gespeichert zu werden. Bitte wähle ein kleineres Bild (bis zu 5MB).');
+      }
     };
+
+    reader.onerror = () => {
+      this.showErrorMessage('Fehler beim Laden des Bildes. Bitte versuche es erneut.');
+    };
+
+    if (file.size > 5000000) { // 5MB limit
+      this.showErrorMessage('Das Bild ist zu groß, um im lokalen Speicher gespeichert zu werden. Bitte wähle ein kleineres Bild (bis zu 5MB).');
+      return;
+    }
 
     reader.readAsDataURL(file);
   }
@@ -43,23 +69,25 @@ export class DashboardComponent {
     document.getElementById('fileInput')?.click();
   }
 
-  removeImage() {
-    this.imageService.saveImage('');
-    this.headerImage = 'assets/plants_standard.jpg';
-    this.cdr.detectChanges();
-  }
-
   openImageSelectionModal() {
-    const dialogRef = this.dialog.open(ImageSelectionComponent);
+    const dialogRef = this.dialog.open(ImageSelectionComponent, {
+      width: '600px'
+    });
 
     dialogRef.afterClosed().subscribe(image => {
       if (image) {
         this.imageService.saveImage(image);
         this.headerImage = image;
         this.cdr.detectChanges();
-      } else {
-        this.triggerFileInput();
       }
+    });
+  }
+
+  showErrorMessage(message: string) {
+    this.snackBar.open(message, 'Schließen', {
+      duration: 5000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
     });
   }
 }
