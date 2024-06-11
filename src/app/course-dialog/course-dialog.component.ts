@@ -24,7 +24,7 @@ export class CourseDialogComponent implements OnInit {
   ) {
     this.courseForm = this.fb.group({
       name: [data.name || '', [Validators.required, Validators.maxLength(50)]],
-      semester: [data.semeter || '', [Validators.required, Validators.min(1), Validators.max(10)]],
+      semester: [data.semester || '', [Validators.required, Validators.min(1), Validators.max(10)]],
       exam: [data.exam || '', [Validators.required, Validators.maxLength(50)]],
       examDate: [data.examDate || ''],
       grade: [data.grade || '', [this.gradeFormatValidator]],
@@ -72,9 +72,13 @@ export class CourseDialogComponent implements OnInit {
 
   gradeFormatValidator(control: FormControl) {
     const value = control.value;
+    if (!value) {
+      return null;
+    }
     const valid = /^\d+(\.\d{1,2})?$/.test(value);
     return valid ? null : { invalidGrade: true };
   }
+
 
   replaceCommaWithDot(event: any): void {
     const value = event.target.value;

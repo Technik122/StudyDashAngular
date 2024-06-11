@@ -16,17 +16,16 @@
     </mat-menu>
   </h2>
   <mat-accordion>
-    <mat-expansion-panel *ngFor="let todo of toDos" [ngStyle]="{'background-color': courseColors.get(todo.id)}">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ todo.description }}
+    <mat-expansion-panel *ngFor="let todo of toDos" [ngStyle]="{'border-color': courseColors.get(todo.id)}">
+    <mat-expansion-panel-header>
+        <mat-panel-title class="colored-part" [ngStyle]="{'background-color': courseColors.get(todo.id)}">
+          <span class="description-text">{{ todo.description }}</span>
         </mat-panel-title>
         <mat-panel-description>
           Enddatum: {{ todo.deadLine | date:'dd.MM.yyyy' }}
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div>
-
         <app-subtask *ngFor="let subtask of subtasks.get(todo.id)" [subtask]="subtask"></app-subtask>
 
         <mat-label>Priorität</mat-label>

@@ -8,10 +8,12 @@
     </button>
   </h2>
   <div class="course-list">
-    <mat-card *ngFor="let course of courses" class="course-card" [style.background-color]="course.color">
+    <mat-card *ngFor="let course of courses" class="course-card">
+      <div class="card-top" [style.background-color]="course.color">
+        <span class="course-title">{{ course.name }}</span>
+      </div>
       <div class="todo-count-bubble">{{ courseToDosCount.get(course.id) }}</div>
       <mat-card-header>
-        <mat-card-title>{{ course.name }}</mat-card-title>
         <mat-card-subtitle>Semester: {{ course.semester }}</mat-card-subtitle>
         <br>
         <mat-card-subtitle>Prüfung: {{ course.exam }}</mat-card-subtitle>

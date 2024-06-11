@@ -2,6 +2,10 @@
   padding: 20px;
 }
 
+.task-border {
+  border: 2px solid;
+}
+
 .underlined-heading {
   position: relative;
   padding-bottom: 10px;
@@ -20,6 +24,39 @@
 
 .mat-accordion .mat-expansion-panel-header {
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+}
+
+.mat-expansion-panel-header.mat-expanded .colored-part {
+  background-color: transparent !important;
+}
+
+.mat-expansion-panel.mat-expanded {
+  border-width: 3px;
+  border-style: solid;
+}
+
+.colored-part {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  color: #000000;
+  flex-shrink: 0;
+}
+
+.description-text {
+  color: #000000;
+  white-space: nowrap;
+}
+
+.mat-panel-description {
+  margin-left: auto;
+  padding: 10px 16px;
 }
 
 .task-actions {

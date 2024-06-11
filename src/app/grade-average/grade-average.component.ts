@@ -58,7 +58,7 @@ export class GradeAverageComponent implements OnInit {
     } else if (this.averageGrade < 5.9) {
       this.message = "Es ist Zeit, sich mehr anzustrengen. Du kannst es schaffen!";
     } else {
-      this.message = "Lass den Kopf nicht hängen. Jeder hat Raum für Verbesserungen!";
+      this.message = "Noch keine Noten vorhanden. Füge ein paar hinzu!";
     }
   }
 
