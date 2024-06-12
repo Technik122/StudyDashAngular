@@ -56,3 +56,8 @@ Dieses Projekt verwendet die Bilder von einem Freund der Entwickler. Es liegt ei
 Dieses Projekt wurde im Rahmen der kostenlosen Verfügung auf Google Cloud deployt.
 - **Lizenz**: Creative Commons Attribution 4.0 License, Apache License 2.0
 - **URL**: [https://cloud.google.com/terms](https://cloud.google.com/terms)
+
+### Docker
+Im Rahmen des Deployments wurde ein Docker-Container verwendet.
+- **Lizenz**: Apache License 2.0
+- **URL**: [https://www.docker.com/legal/](https://www.docker.com/legal/)
