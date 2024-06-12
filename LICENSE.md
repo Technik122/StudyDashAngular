@@ -2,11 +2,26 @@
 
 ## Lizenz
 
-Dieses Projekt verwendet folgendes Framework:
+Dieses Projekt verwendet folgendes Framework und Bibliotheken:
 
 ### Angular
 - **Lizenz**: MIT-Lizenz
 - **URL**: [https://angular.dev/license](https://angular.dev/license)
+### Angular Material
+- **Lizenz**: MIT-Lizenz
+- **URL**: [https://material.angular.io/](https://material.angular.io/)
+### RxJS
+- **Lizenz**: MIT-Lizenz
+- **URL**: [https://rxjs.dev/license](https://rxjs.dev/license)
+### NgRx
+- **Lizenz**: MIT-Lizenz
+- **URL**: [https://ngrx.io/license](https://ngrx.io/license)
+###
+Dieses Projekt verwendet folgenden Package Manager:
+
+### npm
+- **Lizenz**: Artistic License 2.0
+- **URL**: [https://docs.npmjs.com/policies/npm-license](https://docs.npmjs.com/policies/npm-license)
 ###
 Dieses Projekt verwendet folgende Icons von Icons8:
 
