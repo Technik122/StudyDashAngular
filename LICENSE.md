@@ -25,6 +25,9 @@ Dieses Projekt verwendet folgendes Framework und Bibliotheken:
 ###
 Dieses Projekt verwendet folgenden Package Manager:
 
+### Node.js
+- **Lizenz**: MIT-Lizenz
+- **URL**: [https://github.com/nodejs/node/blob/main/LICENSE](https://github.com/nodejs/node/blob/main/LICENSE)
 ### npm
 - **Lizenz**: Artistic License 2.0
 - **URL**: [https://docs.npmjs.com/policies/npm-license](https://docs.npmjs.com/policies/npm-license)
