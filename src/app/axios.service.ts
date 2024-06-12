@@ -78,8 +78,8 @@ export class AxiosService {
   }
 
   logout(): void {
-    this.setAuthToken(null);
     this.notificationsService.success('Auf Wiedersehen 🥳', 'Sie haben sich erfolgreich ausgeloggt.', {timeOut: 10000});
+    this.setAuthToken(null);
   }
 
   async request(method: string, url: string, data: any): Promise<any> {

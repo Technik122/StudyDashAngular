@@ -10,12 +10,18 @@ Dieses Projekt verwendet folgendes Framework und Bibliotheken:
 ### Angular Material
 - **Lizenz**: MIT-Lizenz
 - **URL**: [https://material.angular.io/](https://material.angular.io/)
+### Angular2-Notifications
+- **Lizenz**: MIT-Lizenz
+- **URL**: [https://www.npmjs.com/package/angular2-notifications#license](https://www.npmjs.com/package/angular2-notifications#license)
 ### RxJS
 - **Lizenz**: MIT-Lizenz
 - **URL**: [https://rxjs.dev/license](https://rxjs.dev/license)
 ### NgRx
 - **Lizenz**: MIT-Lizenz
 - **URL**: [https://ngrx.io/license](https://ngrx.io/license)
+### Axios
+- **Lizenz**: MIT-Lizenz
+- **URL**: [https://github.com/axios/axios/blob/HEAD/LICENSE](https://github.com/axios/axios/blob/HEAD/LICENSE)
 ###
 Dieses Projekt verwendet folgenden Package Manager:
 
@@ -41,4 +47,9 @@ Dieses Projekt verwendet folgende Icons von Icons8:
 - **thunderstorm.png**: [https://icons8.com/icon/41144/cloud-lightning](https://icons8.com/icon/41144/cloud-lightning)
 
 ###
-Dieses Projekt verwendet die Bilder von einem Freund der Entwickler. Es liegt eine ausdrückliche Erlaubnis zur Verwendung vor. 
+Dieses Projekt verwendet die Bilder von einem Freund der Entwickler. Es liegt eine ausdrückliche Erlaubnis zur Verwendung vor.
+
+### Google Cloud
+Dieses Projekt wurde im Rahmen der kostenlosen Verfügung auf Google Cloud deployt.
+- **Lizenz**: Creative Commons Attribution 4.0 License, Apache License 2.0
+- **URL**: [https://cloud.google.com/terms](https://cloud.google.com/terms)
