@@ -6,6 +6,17 @@ body {
   overflow: auto;
 }
 
+.header-title {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  font-size: 23px;
+  font-weight: normal;
+  z-index: 1;
+  letter-spacing: 3px;
+}
+
 .dashboard {
   display: grid;
   grid-template-rows: auto 1fr auto;
