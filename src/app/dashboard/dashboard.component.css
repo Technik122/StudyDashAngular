@@ -16,6 +16,17 @@ body {
   position: relative;
 }
 
+button[mat-icon-button] {
+  margin-left: 7px;
+  padding: 0;
+  position: relative;
+}
+
+button[mat-icon-button] mat-icon {
+  color: #ffffff;
+  font-size: 30px;
+}
+
 .dashboard-header-container {
   grid-column: 1 / -1;
   width: 100%;

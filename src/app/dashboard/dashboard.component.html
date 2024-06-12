@@ -1,12 +1,15 @@
 <div class="dashboard">
   <div class="dashboard-header-container">
     <div class="dashboard-header" [ngStyle]="{'background-image': 'url(' + headerImage + ')'}">
-      <div class="button-group">
-        <button mat-raised-button class="button" (click)="triggerFileInput()">Hochladen</button>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="triggerFileInput()">Hochladen</button>
         <input type="file" id="fileInput" (change)="onImageSelected($event)" class="image-input">
-        <button mat-raised-button *ngIf="headerImage" class="button" (click)="openImageSelectionModal()">Standard Bild ändern</button>
-      </div>
-      <button mat-raised-button class="logout-button" (click)="logout()">Ausloggen</button>
+        <button mat-menu-item *ngIf="headerImage" (click)="openImageSelectionModal()">Standard Bild ändern</button>
+        <button mat-menu-item (click)="logout()">Ausloggen</button>
+      </mat-menu>
     </div>
   </div>
 

@@ -66,4 +66,9 @@
 .register-text a {
   color: #0A84FF;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
 }

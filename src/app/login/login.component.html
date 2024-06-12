@@ -14,7 +14,7 @@
           <input matInput type="password" placeholder="Ihr Passwort" [(ngModel)]="password" name="password">
         </mat-form-field>
         <button type="submit" class="login-button">Login</button>
-        <p class="register-text" (click)="goToRegister()">Noch kein Account? Registrieren</p>
+        <p class="register-text">Noch kein Account? <a (click)="goToRegister()">Registrieren</a></p>
       </form>
     </mat-card-content>
   </mat-card>
