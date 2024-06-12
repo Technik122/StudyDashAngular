@@ -14,7 +14,7 @@ export class AxiosService {
   todoAddedOrChanged = new EventEmitter<Todo>();
 
   constructor(private notificationsService: NotificationsService) {
-    axios.defaults.baseURL = "http://localhost:8080"
+    axios.defaults.baseURL = "https://studydash-426211.ey.r.appspot.com/"
     axios.defaults.headers.post["Content-Type"] = "application/json"
   }
 
