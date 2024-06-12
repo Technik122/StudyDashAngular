@@ -4,6 +4,7 @@ import { ImageService } from '../image.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ImageSelectionComponent } from '../image-selection/image-selection.component';
+import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -89,5 +90,24 @@ export class DashboardComponent {
       verticalPosition: 'top',
       horizontalPosition: 'center',
     });
+  }
+
+  async deleteAccount() {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '600px'
+    });
+
+    const result = await dialogRef.afterClosed().toPromise();
+
+    if (result) {
+      try {
+        //await this.accountService.deleteAccount();
+        // Navigate to login or another appropriate page after successful deletion
+        //this.router.navigate(['/login']);
+      } catch (error) {
+        // Handle error, e.g. show a message to the user
+        console.error('Error deleting account', error);
+      }
+    }
   }
 }

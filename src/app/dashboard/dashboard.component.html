@@ -9,6 +9,7 @@
         <input type="file" id="fileInput" (change)="onImageSelected($event)" class="image-input">
         <button mat-menu-item *ngIf="headerImage" (click)="openImageSelectionModal()">Standard Bild ändern</button>
         <button mat-menu-item (click)="logout()">Ausloggen</button>
+        <button mat-menu-item (click)="deleteAccount()">Account löschen</button>
       </mat-menu>
     </div>
   </div>
