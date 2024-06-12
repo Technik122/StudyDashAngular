@@ -1,10 +1,18 @@
 .login-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url('/assets/sea.jpg');
+  background-image: url('/assets/mountains_login.jpg');
   background-size: cover;
+}
+
+.titleStudy {
+  font-size: 36px;
+  color: white;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .hidden {
