@@ -125,6 +125,14 @@ export class AxiosService {
     }
   }
 
+  async deleteUser(id: string): Promise<AxiosResponse> {
+    return this.request('DELETE', `/user/delete/${id}`, null);
+  }
+
+  async getUser(): Promise<any> {
+    return this.request('GET', '/user/get', null);
+  }
+
   async getToDosByUser(): Promise<AxiosResponse> {
     return this.request('GET', '/todos/get', null);
   }

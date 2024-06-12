@@ -1,10 +1,12 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { ImageService } from '../image.service';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ImageSelectionComponent } from '../image-selection/image-selection.component';
-import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
+import {ChangeDetectorRef, Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {ImageService} from '../image.service';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {ImageSelectionComponent} from '../image-selection/image-selection.component';
+import {ConfirmDeleteDialogComponent} from '../confirm-delete-dialog/confirm-delete-dialog.component';
+import {AxiosService} from "../axios.service";
+import {NotificationsService} from "angular2-notifications";
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +21,9 @@ export class DashboardComponent {
     private imageService: ImageService,
     private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private axiosService: AxiosService,
+    private notificationsService: NotificationsService
   ) {
     const savedImage = this.imageService.getImage();
     if (savedImage) {
@@ -100,13 +104,14 @@ export class DashboardComponent {
     const result = await dialogRef.afterClosed().toPromise();
 
     if (result) {
-      try {
-        //await this.accountService.deleteAccount();
-        // Navigate to login or another appropriate page after successful deletion
-        //this.router.navigate(['/login']);
-      } catch (error) {
-        // Handle error, e.g. show a message to the user
-        console.error('Error deleting account', error);
+      const user = await this.axiosService.getUser();
+      const userId = user.data.id;
+      if (userId) {
+        this.axiosService.deleteUser(userId).then(() => {
+          this.axiosService.setAuthToken(null);
+          this.router.navigate(['/login']);
+          this.notificationsService.success('Account erfolgreich gelöscht', 'Wir sehen uns!', {timeOut: 10000});
+        });
       }
     }
   }
