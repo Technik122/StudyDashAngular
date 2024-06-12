@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     this.dialog.open(ConsentDialogComponent, {
-      width: '400px',
+      width: '500px',
       data: {}
     });
 
