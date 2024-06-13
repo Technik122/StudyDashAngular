@@ -47,16 +47,12 @@ export class WeatherWidgetComponent implements OnInit {
       return;
     }
 
-    // Speichere den aktuellen Ort im localStorage
     localStorage.setItem('location', this.location);
 
-    // Update the weather widget URL based on the input location
     this.weatherWidgetUrl = `https://forecast7.com/de/53d559d99/${this.location.replace(' ', '').toLowerCase()}/`;
 
-    // Reload the weather widget script to apply changes
     this.loadWeatherWidgetScript();
 
-    // Fetch the weather data from OpenWeatherMap API
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${this.location}&appid=${this.apiKey}&units=metric&lang=de`;
 
     axios.get(url).then(response => {
@@ -90,17 +86,17 @@ export class WeatherWidgetComponent implements OnInit {
   getWeatherIcon(main: string) {
     switch (main.toLowerCase()) {
       case 'clear':
-        return '/assets/sun.png'; // Pfad zum Sonnen-Icon
+        return '/assets/sun.png';
       case 'clouds':
-        return '/assets/cloudy.png'; // Pfad zum bewölkt-Icon
+        return '/assets/cloudy.png';
       case 'drizzle':
-        return '/assets/rain.png'; // Pfad zum Schauerregen-Icon
+        return '/assets/rain.png';
       case 'rain':
-        return '/assets/rain.png'; // Pfad zum Regen-Icon
+        return '/assets/rain.png';
       case 'thunderstorm':
-        return '/assets/thunderstorm.png'; // Pfad zum Gewitter-Icon
+        return '/assets/thunderstorm.png';
       case 'snow':
-        return '/assets/snow.png'; // Pfad zum Schnee-Icon
+        return '/assets/snow.png';
       case 'mist':
       case 'smoke':
       case 'haze':
@@ -110,9 +106,9 @@ export class WeatherWidgetComponent implements OnInit {
       case 'ash':
       case 'squall':
       case 'tornado':
-        return '/assets/mist.png'; // Pfad zum Nebel-Icon
+        return '/assets/mist.png';
       default:
-        return '/assets/unknown.png'; // Pfad zum Unbekannt-Icon
+        return '/assets/unknown.png';
     }
   }
 }
