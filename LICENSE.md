@@ -61,3 +61,9 @@ Dieses Projekt wurde im Rahmen der kostenlosen Verfügung auf Google Cloud deplo
 Im Rahmen des Deployments wurde ein Docker-Container verwendet.
 - **Lizenz**: Apache License 2.0
 - **URL**: [https://www.docker.com/legal/](https://www.docker.com/legal/)
+###
+Dieses Projekt verwendet folgende Wetter API:
+
+### OpenWeatherMap
+- **Lizenz**: CC-BY-SA 4.0 [https://creativecommons.org/licenses/by-sa/4.0/](https://creativecommons.org/licenses/by-sa/4.0/)
+- **URL**: [https://openweathermap.org/current](https://openweathermap.org/current)
